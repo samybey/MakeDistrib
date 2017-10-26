@@ -22,10 +22,9 @@ int main (int argc, char* argv[]) {
 				case 1:
 					break;
 				case 2:
-					cout << "destination : " << x << "\n";
+					cout << x << "\n";
 					break;
 				case 3:
-					cout << "dépendences : \n";
 					reste = x.str();
 					dependence = reste.substr(0, reste.find(" "));
 					while (dependence != reste) {
@@ -37,7 +36,7 @@ int main (int argc, char* argv[]) {
 					 cout << reste << "\n";
 					break;
 				case 4:
-					cout << "commande : " << x << "\n";
+					cout << x << "\n";
 				default:
 					break;
 				}
