@@ -1,27 +1,27 @@
-#include "readfile.h"
+#include "readFile.h"
 
 using namespace std;
  
-string parserfichier(char* namefichier)
+string parserFile(char* fileName)
 {
   
-  ifstream fichier(namefichier, ios::in);  // on ouvre le fichier en lecture
+  ifstream file(fileName, ios::in);  // on ouvre le fichier en lecture
   string makefile = "";
 
-  if(fichier)  // si l'ouverture a réussi
+  if(file)  // si l'ouverture a réussi
     
     {       
       stringstream buffer; // variable contenant l'intégralité du fichier 
       // copier l'intégralité du fichier dans le buffer 
-      buffer << fichier.rdbuf(); 
+      buffer << file.rdbuf();
       // nous n'avons plus besoin du fichier ! 
-      fichier.close(); 
+      file.close();
       // manipulations du buffer... 
       /* << "Taille du buffer : " << buffer.str().size() << '\n'; */
       makefile = buffer.str();
       
       
-      fichier.close(); 
+      file.close();
     }
   else  // sinon
     cerr << "Impossible d'ouvrir le fichier !" << endl;

@@ -1,47 +1,63 @@
 #include <regex>
 #include <iostream>
 
-#include "readfile.cpp"
+#include "readFile.cpp"
+#include "Node.cpp"
 
 using namespace std;
 
 int main (int argc, char* argv[]) {
 
-	string makefile = parserfichier(argv[1]);
+	string makefile = parserFile(argv[1]);
 	smatch match;
 
 	try{
 		regex reg ("(?:([\\w]+(?:.[\\w]+)?):(?: ([\\w. ]+))?\\n\\t([\\w. -_]+)(?:\\n|$)+)", regex_constants::ECMAScript);
+
+		vector<Node> vec;
+		string target;
+		vector<string> dependencesVector;
+		string command;
+
+
+		int i;
+		string dependence = "";
+		string rest;
+
+
 		while (regex_search (makefile, match, reg)) {
-			int i = 0;
-			string dependence;
-			string reste;
+			i = 0;
+			target = "";
+			dependencesVector.clear();
+			dependence = "";
+			command = "";
+
 			for (auto x:match) {
 				switch (i) {
 				case 0: //match global
 					break;
 				case 1: //cible
-					cout << x << "\n";
+					target = x;
 					break;
 				case 2: //dependences
-					reste = x.str();
-					dependence = reste.substr(0, reste.find(" "));
-					while (dependence != reste) {
-						cout << dependence << "\n";
-						reste = reste.substr(reste.find(" ") + 1, reste.size()-1);
-						dependence = reste.substr(0, reste.find(" "));
+					rest = x.str();
+					dependence = rest.substr(0, rest.find(" "));
+					while (dependence != rest) {
+						dependencesVector.push_back(dependence);
+						rest = rest.substr(rest.find(" ") + 1, rest.size()-1);
+						dependence = rest.substr(0, rest.find(" "));
 
 					}
-					 cout << reste << "\n";
+					 dependencesVector.push_back(rest);
 					break;
 				case 3: //commande
-					cout << x << "\n";
+					command = x;
 				default: //autre match => erreur
 					break;
 				}
 				i++;
 			}
-			cout << "----------------" <<  endl;
+			vec.push_back({target,dependencesVector, command});
 			makefile = match.suffix().str();
 		}
 	} catch (const regex_error &e) {
