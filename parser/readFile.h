@@ -5,6 +5,6 @@
 #ifndef READFILE_INCLUDE
 #define READFILE_INCLUDE
 
-std::string parserfichier(char* namefichier);
+std::string parserfile(char* fileName);
 
 #endif
