@@ -1,14 +1,11 @@
 #ifndef __NODE_H__
 #define __NODE_H__
 
+#include <string>
+
 class Node : public CBase_Node {
 
-  private:
-    String nom;
-    String commande;
-    Node dependance [];
-    int countDone;
-    //proxy?
+
 
   public:
 
@@ -20,6 +17,13 @@ class Node : public CBase_Node {
     void trouveDepFils(Node fils);
     void creerNodeFils();
     void done();
+
+  private:
+    String m_nom;
+    String m_commande;
+    Node m_dependance [];
+    int m_countDone;
+    //proxy?
 };
 
 #endif //__NODE_H__
