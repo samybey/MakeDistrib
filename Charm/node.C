@@ -1,6 +1,6 @@
 #include "node.decl.h"
 #include "main.decl.h"
-#include <string>
+#include <string.h>
 #include "node.h"
 
 
@@ -14,14 +14,21 @@ Node::Node(String nom, String commande, Node dependance[]) {
 
 Node::Node(CkMigrateMessage *msg) {}
 
-void Node::trouveDepFils(Node fils){
+void Node::execCommand(){
+    if(m_dependance.size != 0){
+      for (int i =0; i< dependance.size(); i++){
+        depFils = trouveDepFils(dependance[i]);
+
+      }
+    }
+}
+
+ Vector<Node> Node::trouveDepFils(Node fils){
 
 }
 void Node::creerNodeFils(){
 
 }
 void Node::done(){
-  if (m_countDone==){
-    
-  }
+
 }

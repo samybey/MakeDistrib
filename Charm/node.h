@@ -23,6 +23,7 @@ class Node : public CBase_Node {
     String m_commande;
     Node m_dependance [];
     int m_countDone;
+    CProxy_Node m_pereProxy;
     //proxy?
 };
 

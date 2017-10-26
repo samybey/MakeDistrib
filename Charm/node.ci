@@ -2,6 +2,6 @@ chare node {
 
   entry Node(String nom, String commande, Node dependance[]);
 
-  entry void execCommand(String command);
+  entry void execCommand(String commande);
 
 };
