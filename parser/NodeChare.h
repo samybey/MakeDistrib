@@ -1,4 +1,4 @@
-classChare NodeChare {
+class NodeChare {
 
 private:
 	std::string target;
