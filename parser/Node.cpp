@@ -16,3 +16,12 @@ bool Node::deleteDependence(std::string dependence){
 	m_dependencesVector.erase(result);
 	return true;
 }
+
+void Node::displayNode() {
+	cout << "Target : \n\t" << m_target << "\n";
+	cout << "Dependences : \n";
+	for(auto i : m_dependencesVector) {
+	    cout << "\t" << i << "\n";
+	}
+	cout << "Command : \n\t" << m_command << "\n\n";
+}

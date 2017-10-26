@@ -15,6 +15,8 @@ public:
 
 	bool deleteDependence(std::string dependence) ;
 
+	void displayNode ();
+
 private:
 	std::string m_target;
 
