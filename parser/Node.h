@@ -5,7 +5,7 @@
 class Node {
 public:
 	Node(std::string target, std::vector<std::string> dependencesVector, std::string command);
-	~Node(){}
+	~Node(){m_dependencesVector.clear();}
 
 	std::string getTarget() { return m_target; }
 

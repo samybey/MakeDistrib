@@ -6,15 +6,16 @@ m_dependencesVector(dependencesVector),
 m_command(command) {}
 
 
-bool Node::deleteDependence(std::string dependence){
-	vector<string>::iterator result = find(m_dependencesVector.begin(), m_dependencesVector.end(), dependence);
+bool Node::deleteDependence(string dependence){
+	vector<string>::iterator it = find(m_dependencesVector.begin(), m_dependencesVector.end(), dependence);
 
-	if (result == m_dependencesVector.end())
+	if (it == m_dependencesVector.end())
 		return false;
 
-	m_dependencesVector.erase(result);
+	m_dependencesVector.erase(it);
 	return true;
 }
+
 
 void Node::displayNode() {
 	cout << "Target : \n\t" << m_target << "\n";
