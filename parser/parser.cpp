@@ -6,25 +6,22 @@
 
 using namespace std;
 
-int main (int argc, char* argv[]) {
+vector<Node> parseMakefile (char* input) {
 
-	string makefile = parserFile(argv[1]);
+	string makefile = parseFile(input);
 	smatch match;
+	vector<Node> vec;
+
+	string target;
+	vector<string> dependencesVector;
+	string command;
+
+	int i;
+	string dependence = "";
+	string rest;
 
 	try{
 		regex reg ("(?:([\\w]+(?:.[\\w]+)?):(?: ([\\w. ]+))?\\n\\t([\\w. -_]+)(?:\\n|$)+)", regex_constants::ECMAScript);
-
-		vector<Node> vec;
-		string target;
-		vector<string> dependencesVector;
-		string command;
-
-
-		int i;
-		string dependence = "";
-		string rest;
-
-
 		while (regex_search (makefile, match, reg)) {
 			i = 0;
 			target = "";
@@ -67,6 +64,6 @@ int main (int argc, char* argv[]) {
 			cout << "The code was error_brack\n";
 		}
 	}
-	return 0;
+	return vec;
 
 } 

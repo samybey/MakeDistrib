@@ -1,9 +1,11 @@
 #include <string>
 
+#ifndef NODE_INCLUDE
+#define NODE_INCLUDE
 class Node {
 public:
 	Node(std::string target, std::vector<std::string> dependencesVector, std::string command);
-	~Node()
+	~Node(){}
 
 	std::string getTarget() { return m_target; }
 
@@ -20,3 +22,5 @@ private:
 
 	std::string m_command;
 };
+
+#endif
