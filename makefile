@@ -1,5 +1,4 @@
 main: main.cpp
-	mpiCC main.cpp -o main
-
+	mpiCC -W -Wall main.cpp -o main -std=c++11
 clean:
 	rm main

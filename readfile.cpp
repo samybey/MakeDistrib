@@ -28,7 +28,3 @@ string parserfichier(char* namefichier)
  
   return makefile;
 }
-
-int main(int argc, char* argv[]){
-  cout << parserfichier(argv[1]);
-}
