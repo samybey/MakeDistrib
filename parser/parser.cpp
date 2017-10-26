@@ -1,14 +1,10 @@
-#include <regex>
-#include <iostream>
-
-#include "readFile.cpp"
-#include "Node.cpp"
+#include "parser.h"
 
 using namespace std;
 
-vector<Node> parseMakefile (char* input) {
+vector<Node> parseMakefile (char* inputFile) {
 
-	string makefile = parseFile(input);
+	string makefile = parseFile(inputFile);
 	smatch match;
 	vector<Node> vec;
 
