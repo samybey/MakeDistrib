@@ -17,14 +17,13 @@ int main (int argc, char* argv[]) {
 			string dependence;
 			string reste;
 			for (auto x:match) {
-				i++;
 				switch (i) {
-				case 1:
+				case 0: //match global
 					break;
-				case 2:
+				case 1: //cible
 					cout << x << "\n";
 					break;
-				case 3:
+				case 2: //dependences
 					reste = x.str();
 					dependence = reste.substr(0, reste.find(" "));
 					while (dependence != reste) {
@@ -35,13 +34,14 @@ int main (int argc, char* argv[]) {
 					}
 					 cout << reste << "\n";
 					break;
-				case 4:
+				case 3: //commande
 					cout << x << "\n";
-				default:
+				default: //autre match => erreur
 					break;
 				}
+				i++;
 			}
-			cout << endl;
+			cout << "----------------" <<  endl;
 			makefile = match.suffix().str();
 		}
 	} catch (const regex_error &e) {
