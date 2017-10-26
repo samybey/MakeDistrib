@@ -14,7 +14,7 @@ int main (int argc, char* argv[]) {
 	try{
 		regex reg ("(?:([\\w]+(?:.[\\w]+)?):(?: ([\\w. ]+))?\\n\\t([\\w. -_]+)(?:\\n|$)+)", regex_constants::ECMAScript);
 
-		map<string, pair<vector<string>, string>> array;
+		vector<Node> vec;
 		string target;
 		vector<string> dependencesVector;
 		string command;
@@ -57,10 +57,7 @@ int main (int argc, char* argv[]) {
 				}
 				i++;
 			}
-			array.insert(
-					pair<string, pair<vector<string>, string>>
-					(target, pair<vector<string>, string> (dependencesVector, command))
-					);
+			vec.push_back({target,dependencesVector, command});
 			makefile = match.suffix().str();
 		}
 	} catch (const regex_error &e) {

@@ -2,20 +2,21 @@
 
 class Node {
 public:
-	Node(std::string cible, std::vector<std::string> dependences, std::string command);
+	Node(std::string target, std::vector<std::string> dependencesVector, std::string command);
+	~Node()
 
-	std::string getTarget();
+	std::string getTarget() { return m_target; }
 
-	std::vector<std::string> getDependences();
+	std::vector<std::string> getDependencesVector() { return m_dependencesVector; }
 
-	std::string getCommand();
+	std::string getCommand() { return m_command; }
 
-	void deleteDependence(std::string dependence);
+	bool deleteDependence(std::string dependence) ;
 
 private:
-	std::string target;
+	std::string m_target;
 
-	std::vector<std::string> dependences;
+	std::vector<std::string> m_dependencesVector;
 
-	std::string command;
+	std::string m_command;
 };
