@@ -2,10 +2,10 @@
 
 using namespace std;
  
-string parseFile(char* fileName)
+string parseFile(char* inputFile)
 {
   
-  ifstream file(fileName, ios::in);  // on ouvre le fichier en lecture
+  ifstream file(inputFile, ios::in);  // on ouvre le fichier en lecture
   string makefile = "";
 
   if(file)  // si l'ouverture a réussi

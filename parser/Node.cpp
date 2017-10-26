@@ -1,4 +1,3 @@
-#include <string>
 #include "Node.h"
 
 Node::Node(std::string target, std::vector<std::string> dependencesVector, std::string command):
