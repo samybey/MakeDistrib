@@ -2,7 +2,7 @@
 
 using namespace std;
  
-string parserFile(char* fileName)
+string parseFile(char* fileName)
 {
   
   ifstream file(fileName, ios::in);  // on ouvre le fichier en lecture
