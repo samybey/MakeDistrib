@@ -61,6 +61,7 @@ vector<Node> parseMakefile (char* inputFile) {
 		}
 	}
 
-	//Vec est le vecteru de node bien faits
-	return createNodeSharedVector(vec);
+	//Vec est le vecteur de node bien faits
+	return vec;
+	//return createNodeSharedVector(vec);
 } 
