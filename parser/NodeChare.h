@@ -2,6 +2,6 @@ class NodeChare {
 
 private:
 	std::string target;
-	std::vector<NodeChare> dependencesVector;
+	std::vector<proxy(NodeChare)> dependencesVector;
 	std::string command;
 };
