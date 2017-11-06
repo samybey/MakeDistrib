@@ -28,7 +28,7 @@ Main::Main(CkArgMsg* msg) {
   // Create the array of Hello chare objects. NOTE: The
   // 'helloArray' object that is returned by 'ckNew()' is
   // actually a Proxy object to the array.
-  CProxy_Node nodeInit = CProxy_Node::ckNew(1); //changer parmètres 
+  CProxy_Node nodeInit = CProxy_Node::ckNew(1); //changer parmètres
 
 
 }
