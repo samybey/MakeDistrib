@@ -60,6 +60,8 @@ vector<Node> parseMakefile (char* inputFile) {
 			cout << "The code was error_brack\n";
 		}
 	}
-	return vec;
 
+	//Vec est le vecteur de node bien faits
+	return vec;
+	//return createNodeSharedVector(vec);
 } 
