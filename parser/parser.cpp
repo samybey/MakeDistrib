@@ -2,6 +2,34 @@
 
 using namespace std;
 
+string parseFile(char* inputFile)
+{
+
+	ifstream file(inputFile, ios::in);  // on ouvre le fichier en lecture
+	string makefile = "";
+
+	if(file)  // si l'ouverture a réussi
+
+	{
+		stringstream buffer; // variable contenant l'intégralité du fichier
+		// copier l'intégralité du fichier dans le buffer
+		buffer << file.rdbuf();
+		// nous n'avons plus besoin du fichier !
+		file.close();
+		// manipulations du buffer...
+		/* << "Taille du buffer : " << buffer.str().size() << '\n'; */
+		makefile = buffer.str();
+
+
+		file.close();
+	}
+	else  // sinon
+		cerr << "Impossible d'ouvrir le fichier !" << endl;
+
+	return makefile;
+}
+
+
 vector<Node> parseMakefile (char* inputFile) {
 
 	string makefile = parseFile(inputFile);
@@ -9,7 +37,7 @@ vector<Node> parseMakefile (char* inputFile) {
 	vector<Node> vec;
 
 	string target;
-	vector<string> dependencesVector;
+	vector<Node> dependencesVector;
 	string command;
 
 	int i;
@@ -36,12 +64,12 @@ vector<Node> parseMakefile (char* inputFile) {
 					rest = x.str();
 					dependence = rest.substr(0, rest.find(" "));
 					while (dependence != rest) {
-						dependencesVector.push_back(dependence);
+						dependencesVector.push_back( {dependence} );
 						rest = rest.substr(rest.find(" ") + 1, rest.size()-1);
 						dependence = rest.substr(0, rest.find(" "));
 
 					}
-					 dependencesVector.push_back(rest);
+					dependencesVector.push_back( {rest} );
 					break;
 				case 3: //commande
 					command = x;
@@ -50,7 +78,7 @@ vector<Node> parseMakefile (char* inputFile) {
 				}
 				i++;
 			}
-			vec.push_back({target,dependencesVector, command});
+			vec.push_back( {target, dependencesVector, command} );
 			makefile = match.suffix().str();
 		}
 	} catch (const regex_error &e) {
