@@ -1,5 +1,7 @@
 #include "Node.h"
 
+using namespace std;
+
 Node::Node(std::string target, std::vector<std::string> dependencesVector, std::string command):
 m_target(target),
 m_dependencesVector(dependencesVector),

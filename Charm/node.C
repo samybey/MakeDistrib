@@ -6,11 +6,11 @@
 
 extern /* readonly */ CProxy_Main mainProxy;
 
-Node::Node(String nom, String commande, Node dependance[]) {
-  m_nom(nom);
-  m_commande(commande);
-  m_dependance(dependance);
-  m_countDone = 0 {}
+Node::Node(std::string name, std::string command, vector<Node> dependances, integer countDone) {
+  m_name(name);
+  m_command(command);
+  m_dependances(dependances);
+  m_countDone = countDone {}
 
 Node::Node(CkMigrateMessage *msg) {}
 
@@ -23,12 +23,26 @@ void Node::execCommand(){
     }
 }
 
- Vector<Node> Node::trouveDepFils(Node fils){
-
-}
-void Node::creerNodeFils(){
-
-}
 void Node::done(){
 
+}
+
+bool Node::deleteDependence(Node dependence){
+	vector<Node>::iterator it = find(m_dependencesVector.begin(), m_dependencesVector.end(), dependence);
+
+	if (it == m_dependencesVector.end())
+		return false;
+
+	m_dependencesVector.erase(it);
+	return true;
+}
+
+
+void Node::displayNode() {
+	cout << "Target : \n\t" << m_target << "\n";
+	cout << "Dependences : \n";
+	for(auto i : m_dependencesVector) {
+	    cout << "\t" << i.getName() << "\n";
+	}
+	cout << "Command : \n\t" << m_command << "\n\n";
 }

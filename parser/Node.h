@@ -1,8 +1,10 @@
-#include <string>
-
 #ifndef NODE_INCLUDE
 #define NODE_INCLUDE
+
+#include <string>
+
 class Node {
+
 public:
 	Node(std::string target, std::vector<std::string> dependencesVector, std::string command);
 	~Node(){m_dependencesVector.clear();}

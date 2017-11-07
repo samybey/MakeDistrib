@@ -3,9 +3,12 @@
 
 #include <regex>
 #include <iostream>
+#include <fstream>
+#include <sstream>
 
-#include "readFile.cpp"
-#include "Node.cpp"
+#include "../Charm/node.C"
+
+std::string parseFile(char* inputFile);
 
 std::vector<Node> parseMakefile(char* inputFile);
 

@@ -8,16 +8,12 @@
 /* readonly */ int numElements;
 
 // Entry point of Charm++ application
-Main::Main(CkArgMsg* msg) {
+int Main::Main(CkArgMsg* msg) {
 
   // There should be 0 or 1 command line arguments.
   // If there is one, it is the number of "Hello"
   // chares that should be created.
-	vector<Node> vec;
-	vec = parseMakefile((char *)CkArgMsg);
-	for(auto i : vec) {
-		i.displayNode();
-	}
+
   // We are done with msg so delete it.
   delete msg;
 
