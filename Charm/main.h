@@ -13,4 +13,4 @@ class Main : public CBase_Main {
   void done();
 };
 
-#endif //__MAIN_H__ 
+#endif //__MAIN_H__
