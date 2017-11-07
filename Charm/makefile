@@ -1,4 +1,4 @@
-CHARMDIR = ../../charm++
+CHARMDIR = ../../charm
 CHARMC = $(CHARMDIR)/bin/charmc $(OPTS)
 
 default: all

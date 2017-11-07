@@ -1,4 +1,4 @@
-#include "node.decl.h"
+#include "main.def.h"
 #include "main.decl.h"
 
 #include "node.h"
