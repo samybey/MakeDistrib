@@ -1,7 +1,11 @@
-chare node {
+module node {
 
-  entry Node(String nom, String commande, Node dependance[]);
+  array [1D] Node {
+    entry Node(String nom, String commande, Node dependance[]);
 
-  entry void execCommand(String commande);
+    entry void exec();
 
+    entry void done(FILE inputFile);
+
+  };
 };

@@ -5,18 +5,16 @@
 
 class Node : public CBase_Node {
 
-
-
   public:
 
   /// Constructors ///
     Node(String nom, String commande, Node dependance[]);
 
     /// Entry Methods ///
+    void exec();
     void execCommand(String command);
     void trouveDepFils(Node fils);
-    void creerNodeFils();
-    void done();
+    void done(FILE inputFile);
 
   private:
     String m_nom;
@@ -24,7 +22,6 @@ class Node : public CBase_Node {
     Node m_dependance [];
     int m_countDone;
     CProxy_Node m_pereProxy;
-    //proxy?
 };
 
 #endif //__NODE_H__
