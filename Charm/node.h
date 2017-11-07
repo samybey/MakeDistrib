@@ -8,8 +8,7 @@ class Node : public CBase_Node {
 
 public:
 	/// Constructors ///
-	Node(std::string name, std::string command, std::vector<Node> dependancesVector, int countDone = 0);
-	Node(std::string name);
+	Node(std::string name, std::vector<Node> dependancesVector, std::string command, int countDone = 0);
 	Node(CkMigrateMessage *msg);
 	~Node(){ m_dependencesVector.clear(); }
 
@@ -19,12 +18,10 @@ public:
 
 	std::string getCommand() { return m_command; }
 
-	bool deleteDependence(Node dependence);
-
 	void displayNode ();
 
 	/// Entry Methods ///
-	void exec();
+	void exec(CProxy_Node pereProxy);
 	void execCommand();
 	void done();
 

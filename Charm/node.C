@@ -4,27 +4,23 @@
 #include "node.h"
 
 using namespace std;
-extern/* readonly */CProxy_Main mainProxy;
 
-Node::Node(string name, string command, vector<Node> dependencesVector, int countDone) :
-		m_name(name), m_command(command), m_dependencesVector(
-				dependencesVector), m_countDone(
+Node::Node(string name, vector<Node> dependencesVector, string command,  int countDone) :
+		m_name(name), m_dependencesVector(
+				dependencesVector), m_command(command),m_countDone(
 				countDone) {
-}
-
-Node::Node(string name) :
-		m_name(name) {
 }
 
 Node::Node(CkMigrateMessage *msg) {
 }
 
-void Node::exec() {
-	if (m_dependencesVector.size() != 0) { // TODO : ne pas executer plusieurs fois la meme commande (trouver un moyen de supprimer le node apres l'avoir executé)
-		for (auto i : m_dependencesVector) {
-			if(true) { // TODO : si c'est une cible
-				i.exec();
-			}
+
+void Node::exec(CProxy_Node pereProxy){
+    m_pereProxy = pereProxy;
+	if(m_dependencesVector.size() != 0){
+		for(auto i : m_dependencesVector) {
+			// TODO : delete les feuille et pas prendre les dependences qui ne sont pas des feuilles
+			i.exec(thisProxy);
 		}
 	} else {
 		execCommand();
@@ -39,8 +35,7 @@ void Node::execCommand() {
 	}
 	int status;
 	waitpid(pid, &status, 0); // wait for child process, test.sh, to finish
-	*/
-	m_pereProxy.done();
+	m_pereProxy.done();*/
 }
 
 void Node::done() {
@@ -70,3 +65,7 @@ void Node::displayNode() {
 	cout << "Command : \n\t" << m_command << "\n\n";
 
 }
+
+
+
+#include "node.def.h"

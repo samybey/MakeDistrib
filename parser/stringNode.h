@@ -1,15 +1,15 @@
-#ifndef NODE_INCLUDE
-#define NODE_INCLUDE
+#ifndef STRINGNODE_INCLUDE
+#define STRINGNODE_INCLUDE
 
 #include <string>
 
-class Node {
+class stringNode {
 
 public:
-	Node(std::string target, std::vector<std::string> dependencesVector, std::string command);
-	~Node(){m_dependencesVector.clear();}
+	stringNode(std::string name, std::vector<std::string> dependencesVector, std::string command);
+	~stringNode(){m_dependencesVector.clear();}
 
-	std::string getTarget() { return m_target; }
+	std::string getName() { return m_name; }
 
 	std::vector<std::string> getDependencesVector() { return m_dependencesVector; }
 
@@ -20,7 +20,7 @@ public:
 	void displayNode ();
 
 private:
-	std::string m_target;
+	std::string m_name;
 
 	std::vector<std::string> m_dependencesVector;
 

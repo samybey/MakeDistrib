@@ -30,14 +30,14 @@ string parseFile(char* inputFile)
 }
 
 
-vector<Node> parseMakefile (char* inputFile) {
+vector<stringNode> parseMakefile (char* inputFile) {
 
 	string makefile = parseFile(inputFile);
 	smatch match;
-	vector<Node> vec;
+	vector<stringNode> vec;
 
 	string target;
-	vector<Node> dependencesVector;
+	vector<string> dependencesVector;
 	string command;
 
 	int i;
@@ -64,12 +64,12 @@ vector<Node> parseMakefile (char* inputFile) {
 					rest = x.str();
 					dependence = rest.substr(0, rest.find(" "));
 					while (dependence != rest) {
-						dependencesVector.push_back( {dependence} );
+						dependencesVector.push_back(dependence);
 						rest = rest.substr(rest.find(" ") + 1, rest.size()-1);
 						dependence = rest.substr(0, rest.find(" "));
 
 					}
-					dependencesVector.push_back( {rest} );
+					dependencesVector.push_back(rest);
 					break;
 				case 3: //commande
 					command = x;
@@ -78,7 +78,7 @@ vector<Node> parseMakefile (char* inputFile) {
 				}
 				i++;
 			}
-			vec.push_back( {target, command, dependencesVector} );
+			vec.push_back( {target, dependencesVector, command} );
 			makefile = match.suffix().str();
 		}
 	} catch (const regex_error &e) {
@@ -93,3 +93,22 @@ vector<Node> parseMakefile (char* inputFile) {
 	return vec;
 	//return createNodeSharedVector(vec);
 } 
+
+vector<Node> secondPass(vector<stringNode> firstPassVec) {
+	vector<Node> secondPassVec =  {};
+	vector<Node> dependencesTemp;
+	for (auto &strNode : firstPassVec) {
+		dependencesTemp.clear();
+		for (auto &strDep : strNode.getDependencesVector()) {
+			for (auto secondPassNode : secondPassVec){
+				if (secondPassNode.getName() == strDep) {
+					dependencesTemp.push_back(secondPassNode);
+					break;
+				}
+			}
+		}
+		secondPassVec.push_back( { strNode.getName(), dependencesTemp, strNode.getCommand() } );
+	}
+	return secondPassVec;
+
+}

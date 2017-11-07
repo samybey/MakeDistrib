@@ -6,10 +6,11 @@
 #include <fstream>
 #include <sstream>
 
-#include "../Charm/node.C"
+#include "../Charm/node.decl.h"
+#include "stringNode.h"
 
 std::string parseFile(char* inputFile);
 
-std::vector<Node> parseMakefile(char* inputFile);
+std::vector<stringNode> parseMakefile(char* inputFile);
 
 #endif
