@@ -4,7 +4,6 @@
 #include "node.h"
 
 using namespace std;
-extern/* readonly */CProxy_Main mainProxy;
 
 Node::Node(string name, string command, vector<Node> dependencesVector, int countDone) :
 		m_name(name), m_command(command), m_dependencesVector(
@@ -19,12 +18,13 @@ Node::Node(string name) :
 Node::Node(CkMigrateMessage *msg) {
 }
 
-void Node::exec() {
-	if (m_dependencesVector.size() != 0) { // TODO : ne pas executer plusieurs fois la meme commande (trouver un moyen de supprimer le node apres l'avoir executé)
-		for (auto i : m_dependencesVector) {
-			if(true) { // TODO : si c'est une cible
-				i.exec();
-			}
+
+void Node::exec(CProxy_Node pereProxy){
+    m_pereProxy = pereProxy;
+	if(m_dependencesVector.size() != 0){
+		for(auto i : m_dependencesVector) {
+			// TODO : delete les feuille et pas prendre les dependences qui ne sont pas des feuilles
+			i.exec(thisProxy);
 		}
 	} else {
 		execCommand();

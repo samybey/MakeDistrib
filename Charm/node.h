@@ -24,7 +24,7 @@ public:
 	void displayNode ();
 
 	/// Entry Methods ///
-	void exec();
+	void exec(CProxy_Node pereProxy);
 	void execCommand();
 	void done();
 
