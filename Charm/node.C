@@ -6,16 +6,16 @@
 
 extern /* readonly */ CProxy_Main mainProxy;
 
-Node::Node(String nom, String commande, Node dependance[], CProxy_Node pereProxy) {
+Node::Node(String nom, String commande, Node dependance[]) {
     m_nom(nom);
     m_commande(commande);
     m_dependance(dependance);
-    m_pereProxy(pereProxy)
     m_countDone = 0 {}
 
     Node::Node(CkMigrateMessage *msg) {}
 
-    void Node::exec(){
+    void Node::exec(CProxy_Node pereProxy){
+        m_pereProxy = pereProxy
         if(m_dependance.size() != 0){
             for(int i=0; i < m_dependance.size()){
                 m_dependance[i].exec();
