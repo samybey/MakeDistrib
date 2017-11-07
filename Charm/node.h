@@ -13,8 +13,7 @@ class Node : public CBase_Node {
     /// Entry Methods ///
     void exec();
     void execCommand(String command);
-    void trouveDepFils(Node fils);
-    void done(FILE inputFile);
+    void done();
 
   private:
     String m_nom;
