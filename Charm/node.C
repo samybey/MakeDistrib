@@ -17,6 +17,7 @@ Node::Node(string name) m_name(name) {}
 
 Node::Node(CkMigrateMessage *msg) {}
 
+
 void Node::exec(){
 	if(m_dependance.size() != 0){
 		for(int i=0; i < m_dependance.size()){
@@ -28,13 +29,15 @@ void Node::exec(){
 	}
 }
 
-void Node::done(){
-
-}
-
 void Node::execCommand(){
 	//Ici on exécute la commande Makefile
-	m_pereProxy.done(fichierProduit);
+	pid_t pid;
+	if((pid = fork()) > 0){
+		execl("/bin/sh", "/bin/sh", "-c", m_commande, 0);
+	}
+	int status;
+	waitpid(pid, &status, 0); // wait for child process, test.sh, to finish
+	m_pereProxy.done();
 }
 
 void Node::done(){
@@ -44,6 +47,7 @@ void Node::done(){
 		execCommand();
 	}
 }
+
 
 bool Node::deleteDependence(Node dependence){
 	vector<Node>::iterator it = find(m_dependencesVector.begin(), m_dependencesVector.end(), dependence);

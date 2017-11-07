@@ -34,5 +34,4 @@ private:
 	int m_countDone;
 	CProxy_Node m_pereProxy;
 };
-
 #endif //__NODE_H__

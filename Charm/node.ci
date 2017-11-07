@@ -5,7 +5,7 @@ module node {
 
     entry void exec();
 
-    entry void done(FILE inputFile);
+    entry void done();
 
   };
 };
