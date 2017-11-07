@@ -13,6 +13,8 @@ main.o : main.C main.h main.decl.h main.def.h node.decl.h
 main.decl.h main.def.h : main.ci
 	$(CHARMC) main.ci
 
+main.h: node.decl.h
+
 node.o : node.C node.h node.decl.h node.def.h main.decl.h
 	$(CHARMC) -o node.o node.C
 

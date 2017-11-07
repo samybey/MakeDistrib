@@ -1,6 +1,8 @@
 #include "main.decl.h"
 #include "main.h"
-//#include "makeParallele.decl.h"
+#include "node.decl.h"
+#include "../parser/parser.cpp"
+
 
 /* readonly */ //CProxy_Main mainProxy;
 /* readonly */ int numElements;
@@ -28,12 +30,6 @@ Main::Main(CkArgMsg* msg) {
   // 'helloArray' object that is returned by 'ckNew()' is
   // actually a Proxy object to the array.
   // CProxy_Node nodeInit = CProxy_Node::ckNew(1); //changer paramètres
-
-
-
-
-
-
 
 
 

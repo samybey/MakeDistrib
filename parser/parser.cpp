@@ -78,7 +78,7 @@ vector<Node> parseMakefile (char* inputFile) {
 				}
 				i++;
 			}
-			vec.push_back( {target, dependencesVector, command} );
+			vec.push_back( {target, command, dependencesVector} );
 			makefile = match.suffix().str();
 		}
 	} catch (const regex_error &e) {
