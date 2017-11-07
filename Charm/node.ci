@@ -1,7 +1,7 @@
 module node {
 
   array [1D] Node {
-    entry Node(String nom, String commande, Node dependance[], CProxy_Node pereProxy);
+    entry Node(std::string nom, std::string commande, Node dependance[], CProxy_Node pereProxy);
 
     entry void exec();
 

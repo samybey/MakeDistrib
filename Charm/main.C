@@ -1,7 +1,7 @@
 #include "main.decl.h"
 
 #include "main.h"
-#include "makeParallele.decl.h"
+#include "node.decl.h"
 #include "../parser/parser.cpp"
 
 /* readonly */ CProxy_Main mainProxy;
