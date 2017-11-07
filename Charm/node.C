@@ -1,30 +1,48 @@
 #include "node.decl.h"
 #include "main.decl.h"
-#include <string.h>
+
 #include "node.h"
 
-
+using namespace std;
 extern /* readonly */ CProxy_Main mainProxy;
 
-Node::Node(std::string name, std::string command, vector<Node> dependances, integer countDone) {
-  m_name(name);
-  m_command(command);
-  m_dependances(dependances);
-  m_countDone = countDone {}
+Node::Node(string name, string command, vector<Node> dependancesVector, CProxy_Code pereProxy, int countDone)
+m_name(name),
+m_command(command),
+m_dependancesVector(dependancesVector),
+m_pereProxy(pereProxy),
+m_countDone(countDone) {}
+
+Node::Node(string name) m_name(name) {}
 
 Node::Node(CkMigrateMessage *msg) {}
 
-void Node::execCommand(){
-    if(m_dependance.size != 0){
-      for (int i =0; i< dependance.size(); i++){
-        depFils = trouveDepFils(dependance[i]);
-
-      }
-    }
+void Node::exec(){
+	if(m_dependance.size() != 0){
+		for(int i=0; i < m_dependance.size()){
+			m_dependance[i].exec();
+		}
+	}
+	else{
+		execCommand();
+	}
 }
 
 void Node::done(){
 
+}
+
+void Node::execCommand(){
+	//Ici on exécute la commande Makefile
+	m_pereProxy.done(fichierProduit);
+}
+
+void Node::done(){
+	m_countDone++;
+	//Sauvegarder le fichier sur la mémoire du proc
+	if (m_countDone >= m_dependance.size()){
+		execCommand();
+	}
 }
 
 bool Node::deleteDependence(Node dependence){
@@ -42,7 +60,8 @@ void Node::displayNode() {
 	cout << "Target : \n\t" << m_target << "\n";
 	cout << "Dependences : \n";
 	for(auto i : m_dependencesVector) {
-	    cout << "\t" << i.getName() << "\n";
+		cout << "\t" << i.getName() << "\n";
 	}
 	cout << "Command : \n\t" << m_command << "\n\n";
+
 }

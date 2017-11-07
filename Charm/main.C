@@ -10,30 +10,26 @@
 // Entry point of Charm++ application
 Main::Main(CkArgMsg* msg) {
 
-  // There should be 0 or 1 command line arguments.
-  // If there is one, it is the number of "Hello"
-  // chares that should be created.
-	vector<Node> vec;
-	vec = parseMakefile((char *)CkArgMsg);
-	for(auto i : vec) {
-		i.displayNode();
-	}
-  // We are done with msg so delete it.
-  delete msg;
+	// There should be 0 or 1 command line arguments.
+	// If there is one, it is the number of "Hello"
+	// chares that should be created.
 
-  // Display some info about this execution
-  // for the user.
-  CkPrintf("Running \"MakeParallele\"");
+	// We are done with msg so delete it.
+	delete msg;
 
-  // Set the mainProxy readonly to point to a
-  // proxy for the Main chare object (this
-  // chare object).
-  mainProxy = thisProxy;
+	// Display some info about this execution
+	// for the user.
+	CkPrintf("Running \"MakeParallele\"");
 
-  // Create the array of Hello chare objects. NOTE: The
-  // 'helloArray' object that is returned by 'ckNew()' is
-  // actually a Proxy object to the array.
-  CProxy_Node nodeInit = CProxy_Node::ckNew(1); //changer parmètres 
+	// Set the mainProxy readonly to point to a
+	// proxy for the Main chare object (this
+	// chare object).
+	mainProxy = thisProxy;
+
+	// Create the array of Hello chare objects. NOTE: The
+	// 'helloArray' object that is returned by 'ckNew()' is
+	// actually a Proxy object to the array.
+	CProxy_Node nodeInit = CProxy_Node::ckNew(1); //changer parmètres
 
 
 }
@@ -45,7 +41,7 @@ Main::Main(CkMigrateMessage* msg) { }
 // When called, the "done()" entry method will cause the program
 // to exit.
 void Main::done() {
-  CkExit();
+	CkExit();
 }
 
 #include "main.def.h"

@@ -5,35 +5,34 @@
 
 class Node : public CBase_Node {
 
+public:
 
-
-  public:
-
-  /// Constructors ///
-    Node(String name, String command = "" , vector<Node> dependancesVector = {} , integer countDone = 0);
+	/// Constructors ///
+	Node(std::string name, std::string command, std::vector<Node> dependancesVector, CProxy_Node pereProxy, int countDone = 0);
+	Node(std::string name);
 	~Node(){ m_dependencesVector.clear(); }
 
 	std::string getName() { return m_name; }
 
-	std::vector<std::string> getDependencesVector() { return m_dependencesVector; }
+	std::vector<Node> getDependencesVector() { return m_dependencesVector; }
 
 	std::string getCommand() { return m_command; }
 
-	bool deleteDependence(Node dependence) ;
+	bool deleteDependence(Node dependence);
 
 	void displayNode ();
 
-    /// Entry Methods ///
-    void execCommand(String command);
-    void done();
+	/// Entry Methods ///
+	void exec();
+	void execCommand(std::string command);
+	void done();
 
-  private:
-    String m_name;
-    String m_command;
-    vector<Node> m_dependancesVector;
-    int m_countDone;
-    CProxy_Node m_pereProxy;
-    //proxy?
+private:
+	std::string m_name;
+	std::string m_command;
+	std::vector<Node> m_dependancesVector;
+	int m_countDone;
+	CProxy_Node m_pereProxy;
 };
 
 #endif //__NODE_H__
