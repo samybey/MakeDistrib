@@ -1,4 +1,4 @@
-CHARMDIR = ../../charm/
+CHARMDIR = /user/2/.base/gaunetc/home/3A/sysdistrib/charm-v6.8.1
 CHARMC = $(CHARMDIR)/bin/charmc $(OPTS)
 
 default: all
