@@ -41,7 +41,7 @@ void Node::done() {
 	}
 }
 
-void Node::addDep(CProxyNode dep) {
+void Node::addDep(CProxy_Node dep) {
 
 }
 

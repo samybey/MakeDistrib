@@ -8,7 +8,6 @@
 
 #include "../Charm/node.decl.h"
 #include "stringNode.h"
-#include "../Charm/node.h"
 
 std::string parseFile(char* inputFile);
 

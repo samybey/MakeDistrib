@@ -12,6 +12,7 @@ public:
 	Node(CkMigrateMessage *msg);
 	~Node(){ m_dependencesVector.clear(); }
 
+	//other methods ?
 	std::string getName() { return m_name; }
 
 	std::vector<CProxy_Node> getDependencesVector() { return m_dependencesVector; }
@@ -26,6 +27,7 @@ public:
 	void exec(CProxy_Node pereProxy);
 	void execCommand();
 	void done();
+	
 private:
 	std::string m_name;
 	std::string m_command;
