@@ -94,8 +94,8 @@ vector<stringNode> parseMakefile (char* inputFile) {
 	//return createNodeSharedVector(vec);
 }
 
-vector<Node> secondPass(vector<stringNode> firstPassVec) {
-	vector<Node> secondPassVec = secondPassVecInit(firstPassVec);
+vector<CProxy_Node> secondPass(vector<stringNode> firstPassVec) {
+	vector<CProxy_Node> secondPassVec = secondPassVecInit(firstPassVec);
 	vector<CProxy_Node> dependencesTemp;
 
 	for (auto strNode : firstPassVec) {
@@ -115,11 +115,11 @@ vector<Node> secondPass(vector<stringNode> firstPassVec) {
 
 
 
-vector<Node> secondPassVecInit(vector<stringNode> firstPassVec) {
-	vector<Node> secondPassVec;
+vector<CProxy_Node> secondPassVecInit(vector<stringNode> firstPassVec) {
+	vector<CProxy_Node> secondPassVec;
 	for (auto strNode : firstPassVec) {
 		secondPassVec.push_back(
-				{ strNode.getName(), {}, strNode.getCommand() });
+				CProxy_Node::ckNew(strNode.getName(), {}, strNode.getCommand()));
 	}
 	return secondPassVec;
 }
@@ -127,13 +127,13 @@ vector<Node> secondPassVecInit(vector<stringNode> firstPassVec) {
 
 
 vector<CProxy_Node> createNodeDep(vector<string> stringDepVec,
-		vector<Node> secondPassVec) {
+		vector<CProxy_Node> secondPassVec) {
 	vector<CProxy_Node> depNodeVec;
 	if (!stringDepVec.empty()) {
 		for (auto strDep : stringDepVec) {
 			for (auto secondPassNode : secondPassVec) {
 				if (secondPassNode.getName() == strDep) {
-					depNodeVec.push_back(secondPassNode.thisProxy);
+					depNodeVec.push_back(secondPassNode);
 					break;
 				}
 			}

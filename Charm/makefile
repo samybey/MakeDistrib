@@ -1,27 +1,27 @@
-CHARMDIR = ../../charm
+CHARMDIR = ../../charm/
 CHARMC = $(CHARMDIR)/bin/charmc $(OPTS)
 
 default: all
 all: node
 
-node : main.o node.o
-	$(CHARMC) -language charm++ -o node main.o node.o
+node : main.o Node.o
+	$(CHARMC) -language charm++ -o node main.o Node.o
 
-main.o : main.C main.h main.decl.h main.def.h node.decl.h
+main.o : main.C main.h main.decl.h main.def.h Node.decl.h
 	$(CHARMC) -o main.o main.C
 
 main.decl.h main.def.h : main.ci
 	$(CHARMC) main.ci
 
-main.h: node.decl.h
+main.h: Node.decl.h
 
-node.o : node.C node.h node.decl.h node.def.h main.decl.h
-	$(CHARMC) -o node.o node.C
+Node.o : Node.C Node.h Node.decl.h Node.def.h main.decl.h
+	$(CHARMC) -o Node.o Node.C
 
-node.decl.h node.def.h : node.ci
-	$(CHARMC) node.ci
+Node.decl.h Node.def.h : Node.ci
+	$(CHARMC) Node.ci
 
 clean:
 	rm -f main.decl.h main.def.h main.o
-	rm -f node.decl.h node.def.h node.o
-	rm -f node charmrun
+	rm -f Node.decl.h Node.def.h Node.o
+	rm -f Node charmrun
