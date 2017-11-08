@@ -1,7 +1,7 @@
 #include "main.decl.h"
 #include "main.h"
 
-#include "node.decl.h"
+#include "Node.decl.h"
 #include "../parser/parser.cpp"
 
 

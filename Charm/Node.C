@@ -1,5 +1,5 @@
-#include "node.decl.h"
-#include "node.h"
+#include "Node.decl.h"
+#include "Node.h"
 
 
 using namespace std;

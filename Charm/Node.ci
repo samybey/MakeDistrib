@@ -1,4 +1,4 @@
-module node {
+module Node {
 
   chare Node {
     entry Node(std::string nom, std::vector<CProxy_Node> dependancesVector, std::string commande);
