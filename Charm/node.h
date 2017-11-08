@@ -8,13 +8,15 @@ class Node : public CBase_Node {
 
 public:
 	/// Constructors ///
-	Node(std::string name, std::vector<Node> dependancesVector, std::string command, int countDone = 0);
+	Node(std::string name, std::vector<CProxy_Node> dependancesVector, std::string command, int countDone = 0);
 	Node(CkMigrateMessage *msg);
 	~Node(){ m_dependencesVector.clear(); }
 
 	std::string getName() { return m_name; }
 
-	std::vector<Node> getdependencesVector() { return m_dependencesVector; }
+	std::vector<CProxy_Node> getDependencesVector() { return m_dependencesVector; }
+
+	void setDependencesVector(std::vector<CProxy_Node> dependencesVector) {m_dependencesVector = dependencesVector;}
 
 	std::string getCommand() { return m_command; }
 
@@ -24,11 +26,10 @@ public:
 	void exec(CProxy_Node pereProxy);
 	void execCommand();
 	void done();
-
 private:
 	std::string m_name;
 	std::string m_command;
-	std::vector<Node> m_dependencesVector;
+	std::vector<CProxy_Node> m_dependencesVector;
 	int m_countDone;
 	CProxy_Node m_pereProxy;
 };

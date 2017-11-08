@@ -5,26 +5,21 @@
 
 using namespace std;
 
-Node::Node(string name, vector<Node> dependencesVector, string command,  int countDone) :
+Node::Node(string name, vector<CProxy_Node> dependencesVector, string command,  int countDone) :
 		m_name(name), m_dependencesVector(
-				dependencesVector), m_command(command),m_countDone(
-				countDone) {
+				dependencesVector), m_command(
+				command), m_countDone(countDone) {
 }
 
 Node::Node(CkMigrateMessage *msg) {
 }
 
-
-void Node::exec(CProxy_Node pereProxy){
-    m_pereProxy = pereProxy;
-	if(m_dependencesVector.size() != 0){
-		for(auto i : m_dependencesVector) {
-			// TODO : delete les feuille et pas prendre les dependences qui ne sont pas des feuilles
-			i.exec(thisProxy);
-		}
-	} else {
-		execCommand();
+void Node::exec(CProxy_Node pereProxy) {
+	m_pereProxy = pereProxy;
+	for (auto i : m_dependencesVector) {
+		i.exec(thisProxy);
 	}
+	execCommand();
 }
 
 void Node::execCommand() {
@@ -44,6 +39,10 @@ void Node::done() {
 	if (m_countDone >= m_dependencesVector.size()) {
 		execCommand();
 	}
+}
+
+void Node::addDep(CProxyNode dep) {
+
 }
 
 bool Node::deleteDependence(Node dependence) {
