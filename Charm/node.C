@@ -41,9 +41,6 @@ void Node::done() {
 	}
 }
 
-void Node::addDep(CProxyNode dep) {
-
-}
 
 bool Node::deleteDependence(Node dependence) {
 	/*vector<Node>::iterator it = find(m_dependencesVector.begin(), m_dependencesVector.end(), dependence);
