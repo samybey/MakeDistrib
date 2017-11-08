@@ -1,7 +1,6 @@
-#include "main.def.h"
-#include "main.decl.h"
-
+#include "node.decl.h"
 #include "node.h"
+
 
 using namespace std;
 
@@ -41,19 +40,6 @@ void Node::done() {
 	}
 }
 
-void Node::addDep(CProxyNode dep) {
-
-}
-
-bool Node::deleteDependence(Node dependence) {
-	/*vector<Node>::iterator it = find(m_dependencesVector.begin(), m_dependencesVector.end(), dependence);
-
-	if (it == m_dependencesVector.end())
-		return false;
-
-	m_dependencesVector.erase(it);*/
-	return true;
-}
 
 void Node::displayNode() {
 	cout << "Target : \n\t" << m_name << "\n";
