@@ -1,5 +1,6 @@
 module Parser {
-
+  extern module StringNode;
+  extern module Node;
   chare Parser {
     	entry Parser();
 	
@@ -7,9 +8,9 @@ module Parser {
 
 	entry [sync] std::vector<CProxy_StringNode> firstPass(char* inputFile);
 	
-	entry [sync] std::vector<CProxy_Node> secondPass(std::vector<stringNode> firstPassTab);
+	entry [sync] std::vector<CProxy_Node> secondPass(std::vector<CProxy_StringNode> firstPassTab);
 
-	entry [sync] std::vector<CProxy_Node> secondPassVecInit(std::vector<stringNode> firstPassVec);
+	entry [sync] std::vector<CProxy_Node> secondPassVecInit(std::vector<CProxy_StringNode> firstPassVec);
 
 	entry [sync] std::vector<CProxy_Node> createNodeDep(std::vector<std::string> stringDepVec,std::vector<CProxy_Node> secondPassVec);
   };

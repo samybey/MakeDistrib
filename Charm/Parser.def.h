@@ -1,3 +1,5 @@
+
+
 /* ---------------- method closures -------------- */
 #ifndef CK_TEMPLATES_ONLY
 #endif /* CK_TEMPLATES_ONLY */
@@ -51,7 +53,7 @@
 #ifndef CK_TEMPLATES_ONLY
 
     struct Closure_Parser::secondPass_4_closure : public SDAG::Closure {
-            std::vector<stringNode > firstPassTab;
+            std::vector<CProxy_StringNode > firstPassTab;
 
 
       secondPass_4_closure() {
@@ -60,7 +62,7 @@
       secondPass_4_closure(CkMigrateMessage*) {
         init();
       }
-            std::vector<stringNode > & getP0() { return firstPassTab;}
+            std::vector<CProxy_StringNode > & getP0() { return firstPassTab;}
       void pup(PUP::er& __p) {
         __p | firstPassTab;
         packClosure(__p);
@@ -74,7 +76,7 @@
 #ifndef CK_TEMPLATES_ONLY
 
     struct Closure_Parser::secondPassVecInit_5_closure : public SDAG::Closure {
-            std::vector<stringNode > firstPassVec;
+            std::vector<CProxy_StringNode > firstPassVec;
 
 
       secondPassVecInit_5_closure() {
@@ -83,7 +85,7 @@
       secondPassVecInit_5_closure(CkMigrateMessage*) {
         init();
       }
-            std::vector<stringNode > & getP0() { return firstPassVec;}
+            std::vector<CProxy_StringNode > & getP0() { return firstPassVec;}
       void pup(PUP::er& __p) {
         __p | firstPassVec;
         packClosure(__p);
@@ -121,12 +123,14 @@
 #endif /* CK_TEMPLATES_ONLY */
 
 
+
+
 /* DEFS: chare Parser: Chare{
 Parser();
 sync std::string parseFile(char* inputFile);
 sync std::vector<CProxy_StringNode > firstPass(char* inputFile);
-sync std::vector<CProxy_Node > secondPass(const std::vector<stringNode > &firstPassTab);
-sync std::vector<CProxy_Node > secondPassVecInit(const std::vector<stringNode > &firstPassVec);
+sync std::vector<CProxy_Node > secondPass(const std::vector<CProxy_StringNode > &firstPassTab);
+sync std::vector<CProxy_Node > secondPassVecInit(const std::vector<CProxy_StringNode > &firstPassVec);
 sync std::vector<CProxy_Node > createNodeDep(const std::vector<std::string > &stringDepVec, const std::vector<CProxy_Node > &secondPassVec);
 };
  */
@@ -331,25 +335,25 @@ PUPable_def(SINGLE_ARG(Closure_Parser::firstPass_3_closure))
 #endif /* CK_TEMPLATES_ONLY */
 
 #ifndef CK_TEMPLATES_ONLY
-/* DEFS: sync std::vector<CProxy_Node > secondPass(const std::vector<stringNode > &firstPassTab);
+/* DEFS: sync std::vector<CProxy_Node > secondPass(const std::vector<CProxy_StringNode > &firstPassTab);
  */
 
-std::vector<CProxy_Node > CProxy_Parser::secondPass(const std::vector<stringNode > &firstPassTab, const CkEntryOptions *impl_e_opts)
+std::vector<CProxy_Node > CProxy_Parser::secondPass(const std::vector<CProxy_StringNode > &firstPassTab, const CkEntryOptions *impl_e_opts)
 {
   ckCheck();
-  //Marshall: const std::vector<stringNode > &firstPassTab
+  //Marshall: const std::vector<CProxy_StringNode > &firstPassTab
   int impl_off=0;
   { //Find the size of the PUP'd data
     PUP::sizer implP;
     //Have to cast away const-ness to get pup routine
-    implP|(std::vector<stringNode > &)firstPassTab;
+    implP|(std::vector<CProxy_StringNode > &)firstPassTab;
     impl_off+=implP.size();
   }
   CkMarshallMsg *impl_msg=CkAllocateMarshallMsg(impl_off,impl_e_opts);
   { //Copy over the PUP'd data
     PUP::toMem implP((void *)impl_msg->msgBuf);
     //Have to cast away const-ness to get pup routine
-    implP|(std::vector<stringNode > &)firstPassTab;
+    implP|(std::vector<CProxy_StringNode > &)firstPassTab;
   }
   CkMarshallMsg *impl_msg_typed_ret = (CkMarshallMsg *)CkRemoteCall(CkIndex_Parser::idx_secondPass_marshall4(), impl_msg, &ckGetChareID());
   char *impl_buf_ret=impl_msg_typed_ret->msgBuf; 
@@ -362,7 +366,7 @@ std::vector<CProxy_Node > CProxy_Parser::secondPass(const std::vector<stringNode
 // Entry point registration function
 
 int CkIndex_Parser::reg_secondPass_marshall4() {
-  int epidx = CkRegisterEp("secondPass(const std::vector<stringNode > &firstPassTab)",
+  int epidx = CkRegisterEp("secondPass(const std::vector<CProxy_StringNode > &firstPassTab)",
       _call_secondPass_marshall4, CkMarshallMsg::__idx, __idx, 0+CK_EP_NOKEEP);
   CkRegisterMessagePupFn(epidx, _marshallmessagepup_secondPass_marshall4);
 
@@ -376,9 +380,9 @@ void CkIndex_Parser::_call_secondPass_marshall4(void* impl_msg, void* impl_obj_v
   int impl_ref = CkGetRefNum(impl_msg), impl_src = CkGetSrcPe(impl_msg);
   CkMarshallMsg *impl_msg_typed=(CkMarshallMsg *)impl_msg;
   char *impl_buf=impl_msg_typed->msgBuf;
-  /*Unmarshall pup'd fields: const std::vector<stringNode > &firstPassTab*/
+  /*Unmarshall pup'd fields: const std::vector<CProxy_StringNode > &firstPassTab*/
   PUP::fromMem implP(impl_buf);
-  std::vector<stringNode > firstPassTab; implP|firstPassTab;
+  std::vector<CProxy_StringNode > firstPassTab; implP|firstPassTab;
   impl_buf+=CK_ALIGN(implP.size(),16);
   /*Unmarshall arrays:*/
   std::vector<CProxy_Node > impl_ret_val=   impl_obj->secondPass(firstPassTab);
@@ -400,9 +404,9 @@ void CkIndex_Parser::_call_secondPass_marshall4(void* impl_msg, void* impl_obj_v
 void CkIndex_Parser::_marshallmessagepup_secondPass_marshall4(PUP::er &implDestP,void *impl_msg) {
   CkMarshallMsg *impl_msg_typed=(CkMarshallMsg *)impl_msg;
   char *impl_buf=impl_msg_typed->msgBuf;
-  /*Unmarshall pup'd fields: const std::vector<stringNode > &firstPassTab*/
+  /*Unmarshall pup'd fields: const std::vector<CProxy_StringNode > &firstPassTab*/
   PUP::fromMem implP(impl_buf);
-  std::vector<stringNode > firstPassTab; implP|firstPassTab;
+  std::vector<CProxy_StringNode > firstPassTab; implP|firstPassTab;
   impl_buf+=CK_ALIGN(implP.size(),16);
   /*Unmarshall arrays:*/
   if (implDestP.hasComments()) implDestP.comment("firstPassTab");
@@ -412,25 +416,25 @@ PUPable_def(SINGLE_ARG(Closure_Parser::secondPass_4_closure))
 #endif /* CK_TEMPLATES_ONLY */
 
 #ifndef CK_TEMPLATES_ONLY
-/* DEFS: sync std::vector<CProxy_Node > secondPassVecInit(const std::vector<stringNode > &firstPassVec);
+/* DEFS: sync std::vector<CProxy_Node > secondPassVecInit(const std::vector<CProxy_StringNode > &firstPassVec);
  */
 
-std::vector<CProxy_Node > CProxy_Parser::secondPassVecInit(const std::vector<stringNode > &firstPassVec, const CkEntryOptions *impl_e_opts)
+std::vector<CProxy_Node > CProxy_Parser::secondPassVecInit(const std::vector<CProxy_StringNode > &firstPassVec, const CkEntryOptions *impl_e_opts)
 {
   ckCheck();
-  //Marshall: const std::vector<stringNode > &firstPassVec
+  //Marshall: const std::vector<CProxy_StringNode > &firstPassVec
   int impl_off=0;
   { //Find the size of the PUP'd data
     PUP::sizer implP;
     //Have to cast away const-ness to get pup routine
-    implP|(std::vector<stringNode > &)firstPassVec;
+    implP|(std::vector<CProxy_StringNode > &)firstPassVec;
     impl_off+=implP.size();
   }
   CkMarshallMsg *impl_msg=CkAllocateMarshallMsg(impl_off,impl_e_opts);
   { //Copy over the PUP'd data
     PUP::toMem implP((void *)impl_msg->msgBuf);
     //Have to cast away const-ness to get pup routine
-    implP|(std::vector<stringNode > &)firstPassVec;
+    implP|(std::vector<CProxy_StringNode > &)firstPassVec;
   }
   CkMarshallMsg *impl_msg_typed_ret = (CkMarshallMsg *)CkRemoteCall(CkIndex_Parser::idx_secondPassVecInit_marshall5(), impl_msg, &ckGetChareID());
   char *impl_buf_ret=impl_msg_typed_ret->msgBuf; 
@@ -443,7 +447,7 @@ std::vector<CProxy_Node > CProxy_Parser::secondPassVecInit(const std::vector<str
 // Entry point registration function
 
 int CkIndex_Parser::reg_secondPassVecInit_marshall5() {
-  int epidx = CkRegisterEp("secondPassVecInit(const std::vector<stringNode > &firstPassVec)",
+  int epidx = CkRegisterEp("secondPassVecInit(const std::vector<CProxy_StringNode > &firstPassVec)",
       _call_secondPassVecInit_marshall5, CkMarshallMsg::__idx, __idx, 0+CK_EP_NOKEEP);
   CkRegisterMessagePupFn(epidx, _marshallmessagepup_secondPassVecInit_marshall5);
 
@@ -457,9 +461,9 @@ void CkIndex_Parser::_call_secondPassVecInit_marshall5(void* impl_msg, void* imp
   int impl_ref = CkGetRefNum(impl_msg), impl_src = CkGetSrcPe(impl_msg);
   CkMarshallMsg *impl_msg_typed=(CkMarshallMsg *)impl_msg;
   char *impl_buf=impl_msg_typed->msgBuf;
-  /*Unmarshall pup'd fields: const std::vector<stringNode > &firstPassVec*/
+  /*Unmarshall pup'd fields: const std::vector<CProxy_StringNode > &firstPassVec*/
   PUP::fromMem implP(impl_buf);
-  std::vector<stringNode > firstPassVec; implP|firstPassVec;
+  std::vector<CProxy_StringNode > firstPassVec; implP|firstPassVec;
   impl_buf+=CK_ALIGN(implP.size(),16);
   /*Unmarshall arrays:*/
   std::vector<CProxy_Node > impl_ret_val=   impl_obj->secondPassVecInit(firstPassVec);
@@ -481,9 +485,9 @@ void CkIndex_Parser::_call_secondPassVecInit_marshall5(void* impl_msg, void* imp
 void CkIndex_Parser::_marshallmessagepup_secondPassVecInit_marshall5(PUP::er &implDestP,void *impl_msg) {
   CkMarshallMsg *impl_msg_typed=(CkMarshallMsg *)impl_msg;
   char *impl_buf=impl_msg_typed->msgBuf;
-  /*Unmarshall pup'd fields: const std::vector<stringNode > &firstPassVec*/
+  /*Unmarshall pup'd fields: const std::vector<CProxy_StringNode > &firstPassVec*/
   PUP::fromMem implP(impl_buf);
-  std::vector<stringNode > firstPassVec; implP|firstPassVec;
+  std::vector<CProxy_StringNode > firstPassVec; implP|firstPassVec;
   impl_buf+=CK_ALIGN(implP.size(),16);
   /*Unmarshall arrays:*/
   if (implDestP.hasComments()) implDestP.comment("firstPassVec");
@@ -597,10 +601,10 @@ void CkIndex_Parser::__register(const char *s, size_t size) {
   // REG: sync std::vector<CProxy_StringNode > firstPass(char* inputFile);
   idx_firstPass_marshall3();
 
-  // REG: sync std::vector<CProxy_Node > secondPass(const std::vector<stringNode > &firstPassTab);
+  // REG: sync std::vector<CProxy_Node > secondPass(const std::vector<CProxy_StringNode > &firstPassTab);
   idx_secondPass_marshall4();
 
-  // REG: sync std::vector<CProxy_Node > secondPassVecInit(const std::vector<stringNode > &firstPassVec);
+  // REG: sync std::vector<CProxy_Node > secondPassVecInit(const std::vector<CProxy_StringNode > &firstPassVec);
   idx_secondPassVecInit_marshall5();
 
   // REG: sync std::vector<CProxy_Node > createNodeDep(const std::vector<std::string > &stringDepVec, const std::vector<CProxy_Node > &secondPassVec);
@@ -613,12 +617,16 @@ void CkIndex_Parser::__register(const char *s, size_t size) {
 void _registerParser(void)
 {
   static int _done = 0; if(_done) return; _done = 1;
+  _registerStringNode();
+
+  _registerNode();
+
 /* REG: chare Parser: Chare{
 Parser();
 sync std::string parseFile(char* inputFile);
 sync std::vector<CProxy_StringNode > firstPass(char* inputFile);
-sync std::vector<CProxy_Node > secondPass(const std::vector<stringNode > &firstPassTab);
-sync std::vector<CProxy_Node > secondPassVecInit(const std::vector<stringNode > &firstPassVec);
+sync std::vector<CProxy_Node > secondPass(const std::vector<CProxy_StringNode > &firstPassTab);
+sync std::vector<CProxy_Node > secondPassVecInit(const std::vector<CProxy_StringNode > &firstPassVec);
 sync std::vector<CProxy_Node > createNodeDep(const std::vector<std::string > &stringDepVec, const std::vector<CProxy_Node > &secondPassVec);
 };
 */
