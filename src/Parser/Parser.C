@@ -1,8 +1,8 @@
-#include "Parser.decl.h"
+#include "../../build/Parser.decl.h"
 #include "Parser.h"
 
-#include "StringNode.decl.h"
-#include "Node.decl.h"
+#include "../../build/StringNode.decl.h"
+#include "../../build/Node.decl.h"
 using namespace std;
 
 Parser::Parser() {
@@ -168,4 +168,4 @@ vector<CProxy_Node> Parser::createNodeDep(vector<string> stringDepVec,
 	return depNodeVec;
 }
 
-#include "Parser.def.h"
+#include "../../build/Parser.def.h"

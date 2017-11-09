@@ -10,7 +10,7 @@ class Parser : public CBase_Parser {
 		/// Constructors ///
 		Parser();
 		Parser(CkMigrateMessage *msg);
-		~Parser();
+		~Parser(){}
 
 		/// Entry Methods ///
 		std::string parseFile(char* inputFile);

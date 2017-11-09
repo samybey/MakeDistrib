@@ -1,8 +1,8 @@
-#include "Main.decl.h"
+#include "../../build/Main.decl.h"
 #include "Main.h"
 
-#include "Node.decl.h"
-#include "Parser.decl.h"
+#include "../../build/Node.decl.h"
+#include "../../build/Parser.decl.h"
 
 /* readonly */ //CProxy_Main mainProxy;
 /* readonly */int numElements;
@@ -46,4 +46,4 @@ void Main::done() {
 	CkExit();
 }
 
-#include "Main.def.h"
+#include "../../build/Main.def.h"
