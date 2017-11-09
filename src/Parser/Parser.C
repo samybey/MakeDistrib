@@ -125,6 +125,7 @@ vector<CProxy_StringNode> Parser::firstPass(char* inputFile) {
 }
 
 vector<CProxy_Node> Parser::secondPass(vector<CProxy_StringNode> firstPassVec) {
+   CkPrintf("debutSecondPass\n");
 	vector < CProxy_Node > secondPassVec = secondPassVecInit(firstPassVec);
 	vector < CProxy_Node > dependencesTemp;
 
@@ -138,7 +139,7 @@ vector<CProxy_Node> Parser::secondPass(vector<CProxy_StringNode> firstPassVec) {
 			}
 		}
 	}
-
+	CkPrintf("finSecondPass\n");
 	return secondPassVec;
 
 }
