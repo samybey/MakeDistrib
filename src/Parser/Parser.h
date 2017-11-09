@@ -5,8 +5,6 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-
-#include "../StringNode/StringNode.h"
 class Parser : public CBase_Parser {
 	public:
 		/// Constructors ///
@@ -15,16 +13,15 @@ class Parser : public CBase_Parser {
 		~Parser();
 
 		/// Entry Methods ///
-		std::string Parser::parseFile(char* inputFile);
+		std::string parseFile(char* inputFile);
 
-		std::vector<CProxy_StringNode> Parser::firstPass(char* inputFile);
+		std::vector<CProxy_StringNode> firstPass(char* inputFile);
 
-		std::vector<CProxy_Node> Parser::secondPass(std::vector<CProxy_StringNode> firstPassTab);
+		std::vector<CProxy_Node> secondPass(std::vector<CProxy_StringNode> firstPassTab);
 
-		std::vector<CProxy_Node> Parser::secondPassVecInit(std::vector<CProxy_StringNode> firstPassVec);
+		std::vector<CProxy_Node> secondPassVecInit(std::vector<CProxy_StringNode> firstPassVec);
 
-		std::vector<CProxy_Node> Parser::createNodeDep(std::vector<std::string> stringDepVec,
-			std::vector<CProxy_Node> secondPassVec);
-}
+		std::vector<CProxy_Node> createNodeDep(std::vector<std::string> stringDepVec,std::vector<CProxy_Node> secondPassVec);
+};
 
 #endif //__PARSER_H__

@@ -1,10 +1,8 @@
 module StringNode {
 
   chare StringNode {
-    entry StringNode(std::string name,std::vector<std::string> dependencesVector,std::string command);
-	
-	entry StringNode();
-	
+    	entry StringNode(std::string name,std::vector<std::string> dependencesVector,std::string command);
+	///entry void ~StringNode() {m_dependencesVector.clear();}///
 	/// Entry Methods ///
 	entry [sync] std::string getName();
 

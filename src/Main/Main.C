@@ -2,6 +2,7 @@
 #include "Main.h"
 
 #include "../../build/Node.decl.h"
+#include "../../build/Parser.decl.h"
 
 /* readonly */ //CProxy_Main mainProxy;
 /* readonly */int numElements;
