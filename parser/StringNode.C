@@ -1,13 +1,15 @@
-#include "stringNode.h"
+#include "StringNode.decl.h"
+#include "StringNode.h"
 
 using namespace std;
 
-stringNode::stringNode(std::string name,
+StringNode::stringNode(std::string name,
 	std::vector<std::string> dependencesVector,
 	std::string command) :
-	m_name(name), m_dependencesVector(dependencesVector), m_command(command) {}
+	m_name(name), m_dependencesVector(dependencesVector), m_command(command) {
+}
 
-bool stringNode::deleteDependence(string dependence) {
+bool StringNode::deleteDependence(string dependence) {
 	vector<string>::iterator it = find(m_dependencesVector.begin(),
 		m_dependencesVector.end(), dependence);
 
@@ -18,7 +20,7 @@ bool stringNode::deleteDependence(string dependence) {
 	return true;
 }
 
-void stringNode::displayNode() {
+void StringNode::displayNode() {
 	cout << "Target : \n\t" << m_name << "\n";
 	cout << "Dependences : \n";
 	for (auto i : m_dependencesVector) {
@@ -26,3 +28,4 @@ void stringNode::displayNode() {
 	}
 	cout << "Command : \n\t" << m_command << "\n\n";
 }
+#include "StringNode.def.h"

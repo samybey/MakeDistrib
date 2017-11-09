@@ -1,8 +1,15 @@
-#include "parser.h"
+#include "Parser.decl.h"
+#include "Parser.h"
 
 using namespace std;
 
-string parseFile(char* inputFile) {
+Parser::Parser() {
+}
+
+Parser::Parser(CkMigrateMessage *msg) {
+}
+
+string Parser::parseFile(char* inputFile) {
 
 	ifstream file(inputFile, ios::in);
 	string makefile = "";
@@ -20,71 +27,71 @@ string parseFile(char* inputFile) {
 	return makefile;
 }
 
-vector<stringNode> firstPass(char* inputFile) {
+vector<stringNode> Parser::firstPass(char* inputFile) {
 	/*
-	string makefile = parseFile(inputFile);
-	smatch match;
-	vector<stringNode> vec;
+	 string makefile = parseFile(inputFile);
+	 smatch match;
+	 vector<stringNode> vec;
 
-	string target;
-	vector < string > dependencesVector;
-	string command;
+	 string target;
+	 vector < string > dependencesVector;
+	 string command;
 
-	int i;
-	string dependence = "";
-	string rest;
+	 int i;
+	 string dependence = "";
+	 string rest;
 
-	try {
-		regex reg(
-			"(?:([\\w]+(?:.[\\w]+)?):(?: ([\\w. ]+))?\\n\\t([\\w. -_]+)(?:\\n|$)+)",
-			regex_constants::ECMAScript);
-		while (regex_search(makefile, match, reg)) {
-			i = 0;
-			target = "";
-			dependencesVector.clear();
-			dependence = "";
-			command = "";
+	 try {
+	 regex reg(
+	 "(?:([\\w]+(?:.[\\w]+)?):(?: ([\\w. ]+))?\\n\\t([\\w. -_]+)(?:\\n|$)+)",
+	 regex_constants::ECMAScript);
+	 while (regex_search(makefile, match, reg)) {
+	 i = 0;
+	 target = "";
+	 dependencesVector.clear();
+	 dependence = "";
+	 command = "";
 
-			for (auto x : match) {
-				switch (i) {
-				case 0: //match global
-					break;
-				case 1: //cible
-					target = x;
-					break;
-				case 2: //dependences
-					rest = x.str();
-					dependence = rest.substr(0, rest.find(" "));
-					while (dependence != rest) {
-						dependencesVector.push_back(dependence);
-						rest = rest.substr(rest.find(" ") + 1, rest.size() - 1);
-						dependence = rest.substr(0, rest.find(" "));
+	 for (auto x : match) {
+	 switch (i) {
+	 case 0: //match global
+	 break;
+	 case 1: //cible
+	 target = x;
+	 break;
+	 case 2: //dependences
+	 rest = x.str();
+	 dependence = rest.substr(0, rest.find(" "));
+	 while (dependence != rest) {
+	 dependencesVector.push_back(dependence);
+	 rest = rest.substr(rest.find(" ") + 1, rest.size() - 1);
+	 dependence = rest.substr(0, rest.find(" "));
 
-					}
-					dependencesVector.push_back(rest);
-					break;
-				case 3: //commande
-					command = x;
-				default: //autre match => erreur
-					break;
-				}
-				i++;
-			}
-			vec.push_back({target, dependencesVector, command});
-			makefile = match.suffix().str();
-		}
-	} catch (const regex_error &e) {
-		cout << "error :" << "\n";
-		cout << e.what();
-		if (e.code() == regex_constants::error_brack) {
-			cout << "The code was error_brack\n";
-		}
-	}
+	 }
+	 dependencesVector.push_back(rest);
+	 break;
+	 case 3: //commande
+	 command = x;
+	 default: //autre match => erreur
+	 break;
+	 }
+	 i++;
+	 }
+	 vec.push_back({target, dependencesVector, command});
+	 makefile = match.suffix().str();
+	 }
+	 } catch (const regex_error &e) {
+	 cout << "error :" << "\n";
+	 cout << e.what();
+	 if (e.code() == regex_constants::error_brack) {
+	 cout << "The code was error_brack\n";
+	 }
+	 }
 
-	//Vec est le vecteur de node bien faits
-	return vec;
-	//return createNodeSharedVector(vec);
-	*/
+	 //Vec est le vecteur de node bien faits
+	 return vec;
+	 //return createNodeSharedVector(vec);
+	 */
 	vector < stringNode > vec;
 
 	std::string target1 = "hello";
@@ -109,7 +116,7 @@ vector<stringNode> firstPass(char* inputFile) {
 	return vec;
 }
 
-vector<CProxy_Node> secondPass(vector<stringNode> firstPassVec) {
+vector<CProxy_Node> Parser::secondPass(vector<stringNode> firstPassVec) {
 	vector < CProxy_Node > secondPassVec = secondPassVecInit(firstPassVec);
 	vector < CProxy_Node > dependencesTemp;
 
@@ -128,7 +135,7 @@ vector<CProxy_Node> secondPass(vector<stringNode> firstPassVec) {
 
 }
 
-vector<CProxy_Node> secondPassVecInit(vector<stringNode> firstPassVec) {
+vector<CProxy_Node> Parser::secondPassVecInit(vector<stringNode> firstPassVec) {
 	vector < CProxy_Node > secondPassVec;
 	for (auto strNode : firstPassVec) {
 		secondPassVec.push_back(
@@ -137,7 +144,7 @@ vector<CProxy_Node> secondPassVecInit(vector<stringNode> firstPassVec) {
 	return secondPassVec;
 }
 
-vector<CProxy_Node> createNodeDep(vector<string> stringDepVec,
+vector<CProxy_Node> Parser::createNodeDep(vector<string> stringDepVec,
 	vector<CProxy_Node> secondPassVec) {
 	vector < CProxy_Node > depNodeVec;
 	if (!stringDepVec.empty()) {
@@ -152,4 +159,6 @@ vector<CProxy_Node> createNodeDep(vector<string> stringDepVec,
 	}
 	return depNodeVec;
 }
+
+#include "Parser.def.h"
 
