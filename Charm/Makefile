@@ -34,6 +34,6 @@ StringNode.decl.h StringNode.def.h : StringNode.ci
 	$(CHARMC) StringNode.ci
 
 clean:
-	rm -f Main.decl.h Main.def.h Main.o
+	rm -f Main.decl.h Main.def.h Main.o Parser.o Parser.decl.h StringNode.o StringNode.decl.h StringNode.def.h
 	rm -f Node.decl.h Node.def.h Node.o
 	rm -f Node charmrun
