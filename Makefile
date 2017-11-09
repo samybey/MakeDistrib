@@ -33,7 +33,7 @@ StringNode.o : src/StringNode/StringNode.C src/StringNode/StringNode.h StringNod
 	$(CHARMC) -o build/StringNode.o src/StringNode/StringNode.C
 
 StringNode.decl.h StringNode.def.h : src/StringNode/StringNode.ci
-	cd src/StringNode ; ../../$(CHARMC) StringNode.ci ; mv StringNode.decl.h ../../build/ ; mv StringNode.def.h ../../build/ ; cd ../..
+	cd src/StringNode ; $../../$(CHARMC) StringNode.ci ; mv StringNode.decl.h ../../build/ ; mv StringNode.def.h ../../build/ ; cd ../..
 
 clean:
 	rm -f build/Main.decl.h build/Main.def.h build/Main.o
