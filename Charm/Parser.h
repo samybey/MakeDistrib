@@ -17,12 +17,11 @@ class Parser : public CBase_Parser {
 		/// Entry Methods ///
 		std::string Parser::parseFile(char* inputFile);
 
-		std::vector<stringNode> Parser::firstPass(char* inputFile);
+		std::vector<CProxy_StringNode> Parser::firstPass(char* inputFile);
 
-		std::vector<CProxy_Node> Parser::secondPass(std::vector<stringNode> firstPassTab);
+		std::vector<CProxy_Node> Parser::secondPass(std::vector<CProxy_StringNode> firstPassTab);
 
-		std::vector<CProxy_Node> Parser::secondPassVecInit(std::vector<
-			stringNode> firstPassVec);
+		std::vector<CProxy_Node> Parser::secondPassVecInit(std::vector<CProxy_StringNode> firstPassVec);
 
 		std::vector<CProxy_Node> Parser::createNodeDep(std::vector<std::string> stringDepVec,
 			std::vector<CProxy_Node> secondPassVec);
