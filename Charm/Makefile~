@@ -1,0 +1,27 @@
+CHARMDIR = /user/2/.base/gaunetc/home/3A/sysdistrib/charm-v6.8.1
+CHARMC = $(CHARMDIR)/bin/charmc $(OPTS)
+
+default: all
+all: Main
+
+Main : Main.o Node.o
+	$(CHARMC) -language charm++ -o Node Main.o Node.o
+
+Main.o : Main.C Main.h Main.decl.h Main.def.h Node.decl.h
+	$(CHARMC) -o Main.o Main.C
+
+Main.decl.h Main.def.h : Main.ci
+	$(CHARMC) Main.ci
+
+Main.h: Node.decl.h
+
+Node.o : Node.C Node.h Node.decl.h Node.def.h
+	$(CHARMC) -o Node.o Node.C
+
+Node.decl.h Node.def.h : Node.ci
+	$(CHARMC) Node.ci
+
+clean:
+	rm -f Main.decl.h Main.def.h Main.o
+	rm -f Node.decl.h Node.def.h Node.o
+	rm -f Node charmrun

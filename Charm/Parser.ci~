@@ -1,0 +1,16 @@
+module Parser {
+
+  chare Parser {
+    	entry Parser();
+	
+	entry [sync] std::string Parser::parseFile(char* inputFile);
+
+	entry [sync] std::vector<stringNode> Parser::firstPass(char* inputFile);
+	
+	entry [sync] std::vector<CProxy_Node> Parser::secondPass(std::vector<stringNode> firstPassTab);
+
+	entry [sync] std::vector<CProxy_Node> Parser::secondPassVecInit(std::vector<stringNode> firstPassVec);
+
+	entry [sync] std::vector<CProxy_Node> Parser::createNodeDep(std::vector<std::string> stringDepVec,std::vector<CProxy_Node> secondPassVec);
+  };
+};

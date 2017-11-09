@@ -1,0 +1,13 @@
+ mainmodule Main {
+
+  //readonly CProxy_Main mainProxy;
+  readonly int numElements;
+
+  extern module Node;
+
+  mainchare Main {
+    entry Main(CkArgMsg* msg);
+    entry void done();
+  };
+
+};
