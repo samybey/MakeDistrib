@@ -4,14 +4,6 @@ module Parser {
   chare Parser {
     	entry Parser();
 	
-	entry [sync] std::string parseFile(char* inputFile);
-
-	entry [sync] std::vector<CProxy_StringNode> firstPass(char* inputFile);
 	
-	entry [sync] std::vector<CProxy_Node> secondPass(std::vector<CProxy_StringNode> firstPassTab);
-
-	entry [sync] std::vector<CProxy_Node> secondPassVecInit(std::vector<CProxy_StringNode> firstPassVec);
-
-	entry [sync] std::vector<CProxy_Node> createNodeDep(std::vector<std::string> stringDepVec,std::vector<CProxy_Node> secondPassVec);
   };
 };
