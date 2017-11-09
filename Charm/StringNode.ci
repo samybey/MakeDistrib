@@ -2,13 +2,13 @@ module StringNode {
 
   chare StringNode {
     	entry StringNode(std::string name,std::vector<std::string> dependencesVector,std::string command);
-	entry ~StringNode() {m_dependencesVector.clear();}
+	///entry void ~StringNode() {m_dependencesVector.clear();}///
 	/// Entry Methods ///
-	entry [sync] std::string getName() {return m_name;}
+	entry [sync] std::string getName();
 
-	entry [sync] std::vector<std::string> getDependencesVector() {return m_dependencesVector;}
+	entry [sync] std::vector<std::string> getDependencesVector();
 
-	entry [sync] std::string getCommand() {return m_command;}
+	entry [sync] std::string getCommand();
 
 	entry [sync] bool deleteDependence(std::string dependence);
 

@@ -2,6 +2,7 @@
 #include "Parser.h"
 
 #include "StringNode.decl.h"
+#include "Node.decl.h"
 using namespace std;
 
 Parser::Parser() {
@@ -12,20 +13,26 @@ Parser::Parser(CkMigrateMessage *msg) {
 
 string Parser::parseFile(char* inputFile) {
 
-	ifstream file(inputFile, ios::in);
-	string makefile = "";
+  ifstream file(inputFile, ios::in);  // on ouvre le fichier en lecture
+  string makefile = "";
 
-	if (!file) {
-		cerr << "Impossible d'ouvrir le fichier !" << endl;
-		return makefile;
-	}
+  if(file)// si l'ouverture a réussi
 
-	stringstream buffer;
-	buffer << file.rdbuf();
-	file.close();
-	makefile = buffer.str();
+    {
+      stringstream buffer; // variable contenant l'intégralité du fichier
+      // copier l'intégralité du fichier dans le buffer
+      buffer << file.rdbuf();
+      // nous n'avons plus besoin du fichier !
+      file.close();
+      // manipulations du buffer...
+      /* << "Taille du buffer : " << buffer.str().size() << '\n'; */
+      makefile = buffer.str();
 
-	return makefile;
+      file.close();
+    }
+  else  // sinon
+      cerr << "Impossible d'ouvrir le fichier !" << endl;
+  return makefile;
 }
 
 vector<CProxy_StringNode> Parser::firstPass(char* inputFile) {
@@ -136,7 +143,7 @@ vector<CProxy_Node> Parser::secondPass(vector<CProxy_StringNode> firstPassVec) {
 
 }
 
-vector<CProxy_Node> Parser::secondPassVecInit(vector<CProx_StringNode> firstPassVec) {
+vector<CProxy_Node> Parser::secondPassVecInit(vector<CProxy_StringNode> firstPassVec) {
 	vector < CProxy_Node > secondPassVec;
 	for (auto strNode : firstPassVec) {
 		secondPassVec.push_back(
@@ -147,7 +154,7 @@ vector<CProxy_Node> Parser::secondPassVecInit(vector<CProx_StringNode> firstPass
 
 vector<CProxy_Node> Parser::createNodeDep(vector<string> stringDepVec,
 	vector<CProxy_Node> secondPassVec) {
-	vector < CProxy_Node > depNodeVec;
+	vector <CProxy_Node> depNodeVec;
 	if (!stringDepVec.empty()) {
 		for (auto strDep : stringDepVec) {
 			for (auto secondPassNode : secondPassVec) {
