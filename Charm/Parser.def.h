@@ -124,7 +124,7 @@
 /* DEFS: chare Parser: Chare{
 Parser();
 sync std::string parseFile(char* inputFile);
-sync std::vector<StringNode > firstPass(char* inputFile);
+sync std::vector<CProxy_StringNode > firstPass(char* inputFile);
 sync std::vector<CProxy_Node > secondPass(const std::vector<stringNode > &firstPassTab);
 sync std::vector<CProxy_Node > secondPassVecInit(const std::vector<stringNode > &firstPassVec);
 sync std::vector<CProxy_Node > createNodeDep(const std::vector<std::string > &stringDepVec, const std::vector<CProxy_Node > &secondPassVec);
@@ -252,10 +252,10 @@ PUPable_def(SINGLE_ARG(Closure_Parser::parseFile_2_closure))
 #endif /* CK_TEMPLATES_ONLY */
 
 #ifndef CK_TEMPLATES_ONLY
-/* DEFS: sync std::vector<StringNode > firstPass(char* inputFile);
+/* DEFS: sync std::vector<CProxy_StringNode > firstPass(char* inputFile);
  */
 
-std::vector<StringNode > CProxy_Parser::firstPass(char* inputFile, const CkEntryOptions *impl_e_opts)
+std::vector<CProxy_StringNode > CProxy_Parser::firstPass(char* inputFile, const CkEntryOptions *impl_e_opts)
 {
   ckCheck();
   //Marshall: char* inputFile
@@ -273,7 +273,7 @@ std::vector<StringNode > CProxy_Parser::firstPass(char* inputFile, const CkEntry
   CkMarshallMsg *impl_msg_typed_ret = (CkMarshallMsg *)CkRemoteCall(CkIndex_Parser::idx_firstPass_marshall3(), impl_msg, &ckGetChareID());
   char *impl_buf_ret=impl_msg_typed_ret->msgBuf; 
   PUP::fromMem implPS(impl_buf_ret); 
-  std::vector<StringNode > retval; implPS|retval; 
+  std::vector<CProxy_StringNode > retval; implPS|retval; 
   CkFreeMsg(impl_msg_typed_ret); 
   return retval; 
 }
@@ -300,7 +300,7 @@ void CkIndex_Parser::_call_firstPass_marshall3(void* impl_msg, void* impl_obj_vo
   char inputFile; implP|inputFile;
   impl_buf+=CK_ALIGN(implP.size(),16);
   /*Unmarshall arrays:*/
-  std::vector<StringNode > impl_ret_val=   impl_obj->firstPass(inputFile);
+  std::vector<CProxy_StringNode > impl_ret_val=   impl_obj->firstPass(inputFile);
   //Marshall: impl_ret_val
   int impl_ret_size=0;
   { //Find the size of the PUP'd data
@@ -594,7 +594,7 @@ void CkIndex_Parser::__register(const char *s, size_t size) {
   // REG: sync std::string parseFile(char* inputFile);
   idx_parseFile_marshall2();
 
-  // REG: sync std::vector<StringNode > firstPass(char* inputFile);
+  // REG: sync std::vector<CProxy_StringNode > firstPass(char* inputFile);
   idx_firstPass_marshall3();
 
   // REG: sync std::vector<CProxy_Node > secondPass(const std::vector<stringNode > &firstPassTab);
@@ -616,7 +616,7 @@ void _registerParser(void)
 /* REG: chare Parser: Chare{
 Parser();
 sync std::string parseFile(char* inputFile);
-sync std::vector<StringNode > firstPass(char* inputFile);
+sync std::vector<CProxy_StringNode > firstPass(char* inputFile);
 sync std::vector<CProxy_Node > secondPass(const std::vector<stringNode > &firstPassTab);
 sync std::vector<CProxy_Node > secondPassVecInit(const std::vector<stringNode > &firstPassVec);
 sync std::vector<CProxy_Node > createNodeDep(const std::vector<std::string > &stringDepVec, const std::vector<CProxy_Node > &secondPassVec);

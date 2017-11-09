@@ -7,7 +7,7 @@ all: Main
 Main : Main.o Node.o Parser.o StringNode.o
 	$(CHARMC) -language charm++ -o Node Main.o Node.o Parser.o StringNode.o
 
-Main.o : Main.C Main.h Main.decl.h Main.def.h Node.decl.h Parser.decl.h
+Main.o : Main.C Main.h Main.decl.h Main.def.h Node.decl.h Parser.decl.h StringNode.decl.h
 	$(CHARMC) -o Main.o Main.C
 
 Main.decl.h Main.def.h : Main.ci
@@ -21,11 +21,13 @@ Node.o : Node.C Node.h Node.decl.h Node.def.h
 Node.decl.h Node.def.h : Node.ci
 	$(CHARMC) Node.ci
 
-Parser.o : Parser.C Parser.h Parser.decl.h Parser.def.h
+Parser.o : Parser.C Parser.h Parser.decl.h Parser.def.h StringNode.decl.h
 	$(CHARMC) -o Parser.o Parser.C
 
 Parser.decl.h Parser.def.h : Parser.ci
 	$(CHARMC) Parser.ci
+
+Parser.h : StringNode.decl.h
 
 StringNode.o : StringNode.C StringNode.h StringNode.decl.h StringNode.def.h
 	$(CHARMC) -o StringNode.o StringNode.C
