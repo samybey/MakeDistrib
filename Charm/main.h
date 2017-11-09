@@ -3,14 +3,13 @@
 
 class Main : public CBase_Main {
 
-public:
+	public:
+		/// Constructors ///
+		Main(CkArgMsg* msg);
+		Main(CkMigrateMessage* msg);
 
-	/// Constructors ///
-	Main(CkArgMsg* msg);
-	Main(CkMigrateMessage* msg);
-
-	/// Entry Methods ///
-	void done();
+		/// Entry Methods ///
+		void done();
 };
 
 #endif //__MAIN_H__

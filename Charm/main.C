@@ -15,7 +15,6 @@ Main::Main(CkArgMsg* msg) {
 	// chares that should be created.
 
 	// We are done with msg so delete it.
-
 	delete msg;
 
 	// Display some info about this execution

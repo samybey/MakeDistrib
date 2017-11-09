@@ -6,31 +6,44 @@
 
 class Node : public CBase_Node {
 
-public:
-	/// Constructors ///
-	Node(std::string name, std::vector<CProxy_Node> dependancesVector, std::string command, int countDone = 0);
-	Node(CkMigrateMessage *msg);
-	~Node(){ m_dependencesVector.clear(); }
+	public:
+		/// Constructors ///
+		Node(std::string name,
+			std::vector<CProxy_Node> dependancesVector,
+			std::string command,
+			int countDone = 0);
+		Node(CkMigrateMessage *msg);
+		~Node() {
+			m_dependencesVector.clear();
+		}
 
-	std::string getName() { return m_name; }
+		std::string getName() {
+			return m_name;
+		}
 
-	std::vector<CProxy_Node> getDependencesVector() { return m_dependencesVector; }
+		std::vector<CProxy_Node> getDependencesVector() {
+			return m_dependencesVector;
+		}
 
-	void setDependencesVector(std::vector<CProxy_Node> dependencesVector) {m_dependencesVector = dependencesVector;}
+		void setDependencesVector(std::vector<CProxy_Node> dependencesVector) {
+			m_dependencesVector = dependencesVector;
+		}
 
-	std::string getCommand() { return m_command; }
+		std::string getCommand() {
+			return m_command;
+		}
 
-	void displayNode ();
+		void displayNode();
 
-	/// Entry Methods ///
-	void exec(CProxy_Node pereProxy);
-	void execCommand();
-	void done();
-private:
-	std::string m_name;
-	std::string m_command;
-	std::vector<CProxy_Node> m_dependencesVector;
-	int m_countDone;
-	CProxy_Node m_pereProxy;
+		/// Entry Methods ///
+		void exec(CProxy_Node pereProxy);
+		void execCommand();
+		void done();
+	private:
+		std::string m_name;
+		std::string m_command;
+		std::vector<CProxy_Node> m_dependencesVector;
+		int m_countDone;
+		CProxy_Node m_pereProxy;
 };
 #endif //__NODE_H__
