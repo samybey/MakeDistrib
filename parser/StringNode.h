@@ -7,10 +7,10 @@ class StringNode : public CBase_StringNode {
 		/// Constructors ///
 		StringNode(std::string name,
 			std::vector<std::string> dependencesVector,
-			std::string command);~stringNode() {
+			std::string command);
+		~StringNode() {
 			m_dependencesVector.clear();
 		}
-		~StringNode();
 		/// Entry Methods ///
 		std::string getName() {
 			return m_name;
