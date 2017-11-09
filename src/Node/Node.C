@@ -1,45 +1,68 @@
 #include "../../build/Node.decl.h"
 #include "Node.h"
+#include <cstdio>
+#include <iostream>
+#include <memory>
+#include <stdexcept>
+#include <string>
+#include <array>
+
 
 using namespace std;
 
 Node::Node(string name,
 	vector<CProxy_Node> dependencesVector,
 	string command,
-	int countDone) :
+	int countDone,
+	bool first) :
 		m_name(name),
 		m_dependencesVector(dependencesVector),
 		m_command(command),
-		m_countDone(countDone) {
+		m_countDone(countDone),
+		m_first(first) {
+
 }
 
 Node::Node(CkMigrateMessage *msg) {
 }
 
+
+void Node::exec() {
+	CkPrintf("Running \"exec Pere\"");
+	if (m_dependencesVector.size()!=0){
+		for (auto i : m_dependencesVector) {
+			i.exec(thisProxy);
+		}
+	}else{
+			execCommand();
+	}
+}
+
 void Node::exec(CProxy_Node pereProxy) {
 	m_pereProxy = pereProxy;
-	for (auto i : m_dependencesVector) {
-		i.exec(thisProxy);
+	CkPrintf("Running \"exec de fils\"");
+	if (m_dependencesVector.size()!=0){
+		for (auto i : m_dependencesVector) {
+			i.exec(thisProxy);
+		}
+	}else{
+			execCommand();
 	}
-	execCommand();
 }
 
 void Node::execCommand() {
-//Ici on exécute la commande Makefile
-	/*pid_t pid;
-	 if ((pid = fork()) > 0) {
-	 execl("/bin/sh", "/bin/sh", "-c", m_command, 0);
-	 }
-	 int status;
-	 waitpid(pid, &status, 0); // wait for child process, test.sh, to finish
-	 m_pereProxy.done();*/
+		system(m_command.c_str());
+		if (m_first) {
+			CkExit();
+		}else{
+			m_pereProxy.done();
+		}
 }
 
 void Node::done() {
 	m_countDone++;
-//Sauvegarder le fichier sur la mémoire du proc
 	if (m_countDone >= m_dependencesVector.size()) {
-		execCommand();
+			execCommand();
 	}
 }
 

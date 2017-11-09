@@ -4,6 +4,8 @@
 #include "../../build/Node.decl.h"
 #include "../../build/Parser.decl.h"
 
+using namespace std;
+
 /* readonly */ //CProxy_Main mainProxy;
 /* readonly */int numElements;
 
@@ -13,26 +15,30 @@ Main::Main(CkArgMsg* msg) {
 	// There should be 0 or 1 command line arguments.
 	// If there is one, it is the number of "Hello"
 	// chares that should be created.
+	/******* NOTE: Parser le Makefile ************/
 
-	// We are done with msg so delete it.
 	delete msg;
 
-	// Display some info about this execution
-	// for the user.
-	//CkPrintf("Running \"MakeParallele\"");
 
-	// Set the mainProxy readonly to point to a
-	// proxy for the Main chare object (this
-	// chare object).
+	CkPrintf("Running \"MakeParallele\"");
+
+
 	//mainProxy = thisProxy;
 
-	// Create the array of Hello chare objects. NOTE: The
-	// 'helloArray' object that is returned by 'ckNew()' is
-	// actually a Proxy object to the array.
-	// CProxy_Node nodeInit = CProxy_Node::ckNew(1); //changer paramètres
-
-	/******* NOTE: Parser le Makefile ************/
 	/******* NOTE: listNodes[1].exec(thisProxy); **********/
+	CProxy_Node fils11 = CProxy_Node::ckNew("fils11", {}, "echo \"Hello world fils 11\"");
+	CProxy_Node fils1 = CProxy_Node::ckNew("fils1", {fils11}, "echo \"Hello world fils 1\"");
+
+
+	CProxy_Node fils2 = CProxy_Node::ckNew("fils2", {}, "echo \"Hello world fils 2\"");
+	/*std::vector<CProxy_Node> dependencesVector;
+	dependencesVector.push_back(fils1);
+	dependencesVector.push_back(fils2);*/
+
+
+	CProxy_Node nodeInit = CProxy_Node::ckNew("bill", {fils1, fils2}, "echo \"Hello world padre\"");
+	nodeInit.setFirst();
+	nodeInit.exec();
 }
 
 // Constructor needed for chare object migration (ignore for now)

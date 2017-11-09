@@ -11,7 +11,8 @@ class Node : public CBase_Node {
 		Node(std::string name,
 			std::vector<CProxy_Node> dependancesVector,
 			std::string command,
-			int countDone = 0);
+			int countDone = 0,
+			bool first = false);
 		Node(CkMigrateMessage *msg);
 		~Node() {
 			m_dependencesVector.clear();
@@ -35,7 +36,12 @@ class Node : public CBase_Node {
 
 		void displayNode();
 
+		void setFirst() {
+			m_first = true;
+		}
+
 		/// Entry Methods ///
+		void exec();
 		void exec(CProxy_Node pereProxy);
 		void execCommand();
 		void done();
@@ -44,6 +50,7 @@ class Node : public CBase_Node {
 		std::string m_command;
 		std::vector<CProxy_Node> m_dependencesVector;
 		int m_countDone;
+		bool m_first;
 		CProxy_Node m_pereProxy;
 };
 #endif //__NODE_H__
