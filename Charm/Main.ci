@@ -1,4 +1,4 @@
- mainmodule main {
+ mainmodule Main {
 
   //readonly CProxy_Main mainProxy;
   readonly int numElements;

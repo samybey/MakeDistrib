@@ -1,8 +1,8 @@
-#include "main.decl.h"
-#include "main.h"
+#include "Main.decl.h"
+#include "Main.h"
 
 #include "Node.decl.h"
-#include "../parser/parser.h"
+#include "Parser.decl.h"
 
 /* readonly */ //CProxy_Main mainProxy;
 /* readonly */int numElements;
@@ -15,7 +15,6 @@ Main::Main(CkArgMsg* msg) {
 	// chares that should be created.
 
 	// We are done with msg so delete it.
-
 	delete msg;
 
 	// Display some info about this execution
@@ -47,4 +46,4 @@ void Main::done() {
 	CkExit();
 }
 
-#include "main.def.h"
+#include "Main.def.h"
