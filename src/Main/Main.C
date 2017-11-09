@@ -49,7 +49,7 @@ Main::Main(CkMigrateMessage* msg) {
 // When called, the "done()" entry method will cause the program
 // to exit.
 void Main::done() {
-	CkExit();
+  CkExit();
 }
 
 #include "../../build/Main.def.h"

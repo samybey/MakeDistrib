@@ -13,29 +13,30 @@ Parser::Parser(CkMigrateMessage *msg) {
 
 string Parser::parseFile(char* inputFile) {
 
-	ifstream file(inputFile, ios::in);  // on ouvre le fichier en lecture
-	string makefile = "";
+  ifstream file("test/Makefile", ios::in);  // on ouvre le fichier en lecture
+  string makefile = "";
 
-	if (file)  // si l'ouverture a réussi
+  if (file)  // si l'ouverture a réussi
 
-	{
-		stringstream buffer; // variable contenant l'intégralité du fichier
-		// copier l'intégralité du fichier dans le buffer
-		buffer << file.rdbuf();
-		// nous n'avons plus besoin du fichier !
-		file.close();
-		// manipulations du buffer...
-		/* << "Taille du buffer : " << buffer.str().size() << '\n'; */
-		makefile = buffer.str();
+    {
+      stringstream buffer; // variable contenant l'intégralité du fichier
+      // copier l'intégralité du fichier dans le buffer
+      buffer << file.rdbuf();
+      // nous n'avons plus besoin du fichier !
+      file.close();
+      // manipulations du buffer...
+      /* << "Taille du buffer : " << buffer.str().size() << '\n'; */
+      makefile = buffer.str();
 
-		file.close();
-	} else
-		// sinon
-		cerr << "Impossible d'ouvrir le fichier !" << endl;
-	return makefile;
+      file.close();
+    } else
+    // sinon
+    cerr << "Impossible d'ouvrir le fichier !" << endl;
+  return makefile;
 }
 
 vector<CProxy_StringNode> Parser::firstPass(char* inputFile) {
+
 
 
 	string makefile = parseFile(inputFile);
@@ -101,50 +102,57 @@ vector<CProxy_StringNode> Parser::firstPass(char* inputFile) {
 	return vec;
 	//return createNodeSharedVector(vec);
 
+
 }
 
 vector<CProxy_Node> Parser::secondPass(vector<CProxy_StringNode> firstPassVec) {
-	vector<CProxy_Node> secondPassVec = secondPassVecInit(firstPassVec);
-	vector<CProxy_Node> dependencesTemp;
+  CkPrintf("debutSecondPass\n");
+  vector<CProxy_Node> secondPassVec = secondPassVecInit(firstPassVec);
+  vector<CProxy_Node> dependencesTemp;
 
-	for (auto strNode : firstPassVec) {
-		dependencesTemp.clear();
-		dependencesTemp = createNodeDep(strNode.getDependencesVector(),
-			secondPassVec);
-		for (auto i : secondPassVec) {
-			if (i.getName() == strNode.getName()) {
-				i.setDependencesVector(dependencesTemp);
-			}
-		}
-	}
-
-	return secondPassVec;
+  for (auto strNode : firstPassVec) {
+    CkPrintf("For1SecondPass\n");
+    dependencesTemp.clear();
+    dependencesTemp = createNodeDep(strNode.getDependencesVector(),secondPassVec);
+    for (auto i : secondPassVec) {
+      CkPrintf("For2SecondPass\n");
+      if (i.getName() == strNode.getName()) {
+	i.setDependencesVector(dependencesTemp);
+	break;
+      }
+    }
+  }
+CkPrintf("finSecondPass\n");
+  return secondPassVec;
 
 }
 
 vector<CProxy_Node> Parser::secondPassVecInit(vector<CProxy_StringNode> firstPassVec) {
-	vector<CProxy_Node> secondPassVec;
-	for (auto strNode : firstPassVec) {
-		secondPassVec.push_back(
-			CProxy_Node::ckNew(strNode.getName(), {}, strNode.getCommand()));
-	}
-	return secondPassVec;
+  vector<CProxy_Node> secondPassVec;
+  for (auto strNode : firstPassVec) {
+    CkPrintf("ForSecondPassVecInit\n");
+    secondPassVec.push_back(
+			    CProxy_Node::ckNew(strNode.getName(), {}, strNode.getCommand()));
+  }
+  return secondPassVec;
 }
 
 vector<CProxy_Node> Parser::createNodeDep(vector<string> stringDepVec,
-	vector<CProxy_Node> secondPassVec) {
-	vector<CProxy_Node> depNodeVec;
-	if (!stringDepVec.empty()) {
-		for (auto strDep : stringDepVec) {
-			for (auto secondPassNode : secondPassVec) {
-				if (secondPassNode.getName() == strDep) {
-					depNodeVec.push_back(secondPassNode);
-					break;
-				}
-			}
-		}
+					  vector<CProxy_Node> secondPassVec) {
+  vector<CProxy_Node> depNodeVec;
+  if (!stringDepVec.empty()) {
+    for (auto strDep : stringDepVec) {
+      CkPrintf("For1CreateNodeDep\n");
+      for (auto secondPassNode : secondPassVec) {
+	CkPrintf("For2CreateNodeDep\n");
+	if (secondPassNode.getName() == strDep) {
+	  depNodeVec.push_back(secondPassNode);
+	  break;
 	}
-	return depNodeVec;
+      }
+    }
+  }
+  return depNodeVec;
 }
 
 #include "../../build/Parser.def.h"

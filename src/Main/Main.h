@@ -1,8 +1,6 @@
 #ifndef __MAIN_H__
 #define __MAIN_H__
-
 class Main : public CBase_Main {
-
 	public:
 		/// Constructors ///
 		Main(CkArgMsg* msg);
