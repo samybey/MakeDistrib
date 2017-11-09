@@ -9,9 +9,5 @@ module StringNode {
 	entry [sync] std::vector<std::string> getDependencesVector();
 
 	entry [sync] std::string getCommand();
-
-	entry [sync] bool deleteDependence(std::string dependence);
-
-	entry void displayNode();
   };
 };

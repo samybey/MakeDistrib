@@ -23,11 +23,6 @@ class StringNode : public CBase_StringNode {
 		std::string getCommand() {
 			return m_command;
 		}
-
-		bool deleteDependence(std::string dependence);
-
-		void displayNode();
-
 	private:
 		std::string m_name;
 
