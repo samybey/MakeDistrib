@@ -121,7 +121,7 @@ vector<CProxy_StringNode> Parser::firstPass(char* inputFile) {
 	dependencesVector3.push_back("hello.h");
 	std::string command3 = "gcc -o main.o -c main.c -W -Wall -ansi -pedantic";
 	vec.push_back({target3, dependencesVector3, command3});
-	return vec;
+	return vec; *
 }
 
 vector<CProxy_Node> Parser::secondPass(vector<CProxy_StringNode> firstPassVec) {
