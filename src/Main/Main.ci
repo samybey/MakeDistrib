@@ -1,10 +1,6 @@
  mainmodule Main {
-
-  //readonly CProxy_Main mainProxy;
-  readonly int numElements;
-
   extern module Node;
-
+  extern module Parser;
   mainchare Main {
     entry Main(CkArgMsg* msg);
     entry void done();

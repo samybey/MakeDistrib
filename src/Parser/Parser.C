@@ -3,6 +3,7 @@
 
 #include "../../build/StringNode.decl.h"
 #include "../../build/Node.decl.h"
+#include "../StringNode/StringNode.h"
 using namespace std;
 
 Parser::Parser() {
@@ -13,7 +14,7 @@ Parser::Parser(CkMigrateMessage *msg) {
 
 string Parser::parseFile(char* inputFile) {
 
-	ifstream file(inputFile, ios::in);  // on ouvre le fichier en lecture
+	ifstream file("test/Makefile", ios::in);  // on ouvre le fichier en lecture
 	string makefile = "";
 
 	if (file)  // si l'ouverture a réussi
@@ -39,7 +40,7 @@ vector<CProxy_StringNode> Parser::firstPass(char* inputFile) {
 
 	string makefile = parseFile(inputFile);
 	smatch match;
-	vector < CProxy_StringNode > vec;
+	vector<CProxy_StringNode> vec;
 
 	string target;
 	vector < string > dependencesVector;
@@ -85,7 +86,9 @@ vector<CProxy_StringNode> Parser::firstPass(char* inputFile) {
 				}
 				i++;
 			}
-			vec.push_back({target, dependencesVector, command});
+			vec.push_back(
+				CProxy_StringNode::ckNew(target, dependencesVector, command,
+					CkMyPe()));
 			makefile = match.suffix().str();
 		}
 	} catch (const regex_error &e) {
@@ -95,27 +98,44 @@ vector<CProxy_StringNode> Parser::firstPass(char* inputFile) {
 			cout << "The code was error_brack\n";
 		}
 	}
+	CkPrintf("tentative de print \n");
 
+	/*for (CProxy_StringNode i : vec) {
+
+	 CkPrintf(i.getName().c_str());
+	 }*/
 	//Vec est le vecteur de node bien faits
 	return vec;
 	//return createNodeSharedVector(vec);
 }
 
 vector<CProxy_Node> Parser::secondPass(vector<CProxy_StringNode> firstPassVec) {
+	CkPrintf("debutSecondPass\n");
+	int a = firstPassVec.size();
+	string b = to_string(a);
+	CkPrintf(b.c_str());
 	vector<CProxy_Node> secondPassVec = secondPassVecInit(firstPassVec);
 	vector<CProxy_Node> dependencesTemp;
-
-	for (auto strNode : firstPassVec) {
+	CkPrintf(to_string(firstPassVec.size()).c_str());
+	for (CProxy_StringNode strNode : firstPassVec) {
+		CkPrintf("For1SecondPass\n");
 		dependencesTemp.clear();
-		dependencesTemp = createNodeDep(strNode.getDependencesVector(),
-			secondPassVec);
-		for (auto i : secondPassVec) {
-			if (i.getName() == strNode.getName()) {
-				i.setDependencesVector(dependencesTemp);
+		StringNode* strNodeLoc = strNode.ckLocal();
+		if (strNodeLoc == NULL) {
+			CkPrintf("Oh noooon \n");
+		} else {
+			dependencesTemp = createNodeDep(strNodeLoc->getDependencesVector(),
+				secondPassVec);
+			for (auto i : secondPassVec) {
+				CkPrintf("For2SecondPass\n");
+				if (i.getName() == strNodeLoc->getName()) {
+					i.setDependencesVector(dependencesTemp);
+					break;
+				}
 			}
 		}
 	}
-
+	CkPrintf("finSecondPass\n");
 	return secondPassVec;
 
 }
@@ -123,9 +143,16 @@ vector<CProxy_Node> Parser::secondPass(vector<CProxy_StringNode> firstPassVec) {
 vector<CProxy_Node> Parser::secondPassVecInit(vector<CProxy_StringNode> firstPassVec) {
 	vector<CProxy_Node> secondPassVec;
 	for (auto strNode : firstPassVec) {
-		secondPassVec.push_back(
-			CProxy_Node::ckNew(strNode.getName(), {}, strNode.getCommand()));
+		StringNode* strNodeLoc = strNode.ckLocal();
+		if (strNodeLoc == NULL) {
+			CkPrintf("Oh noooon \n");
+		} else {
+			secondPassVec.push_back(
+				CProxy_Node::ckNew(strNodeLoc->getName(), {},
+					strNodeLoc->getCommand()));
+		}
 	}
+	CkPrintf("finSecondPassVecInit\n");
 	return secondPassVec;
 }
 
@@ -134,7 +161,9 @@ vector<CProxy_Node> Parser::createNodeDep(vector<string> stringDepVec,
 	vector<CProxy_Node> depNodeVec;
 	if (!stringDepVec.empty()) {
 		for (auto strDep : stringDepVec) {
+			CkPrintf("For1CreateNodeDep\n");
 			for (auto secondPassNode : secondPassVec) {
+				CkPrintf("For2CreateNodeDep\n");
 				if (secondPassNode.getName() == strDep) {
 					depNodeVec.push_back(secondPassNode);
 					break;

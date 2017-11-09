@@ -41,8 +41,8 @@ class Node : public CBase_Node {
 		void done();
 	private:
 		std::string m_name;
-		std::string m_command;
 		std::vector<CProxy_Node> m_dependencesVector;
+		std::string m_command;
 		int m_countDone;
 		CProxy_Node m_pereProxy;
 };

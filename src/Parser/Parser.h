@@ -5,12 +5,14 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+
 class Parser : public CBase_Parser {
 	public:
 		/// Constructors ///
 		Parser();
 		Parser(CkMigrateMessage *msg);
-		~Parser(){}
+		~Parser() {
+		}
 
 		/// Entry Methods ///
 		std::string parseFile(char* inputFile);
@@ -21,7 +23,8 @@ class Parser : public CBase_Parser {
 
 		std::vector<CProxy_Node> secondPassVecInit(std::vector<CProxy_StringNode> firstPassVec);
 
-		std::vector<CProxy_Node> createNodeDep(std::vector<std::string> stringDepVec,std::vector<CProxy_Node> secondPassVec);
+		std::vector<CProxy_Node> createNodeDep(std::vector<std::string> stringDepVec,
+			std::vector<CProxy_Node> secondPassVec);
 };
 
 #endif //__PARSER_H__
