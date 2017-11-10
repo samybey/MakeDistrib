@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<class type="charm.debug.preference.Execution">
+  <java.lang.String name="executable" value="Main" />
+  <java.lang.String name="parameters" value="test/Makefile" />
+  <boolean name="doNotSuspend" value="false" />
+  <int name="npes" value="1" />
+  <java.lang.String name="ccshost" value="" />
+  <java.lang.String name="port" value="" />
+  <int name="sshport" value="0" />
+  <java.lang.String name="hostname" value="localhost" />
+  <java.lang.String name="username" value="" />
+  <boolean name="sshTunnel" value="false" />
+  <java.lang.String name="locationOnDisk" />
+  <java.lang.String name="workingDir" value="/user/5/.base/beyousa/home/Documents/3A/SystemeDistribue/MakeDistrib" />
+  <java.lang.String name="inputFile" value="" />
+  <boolean name="waitFile" value="false" />
+  <boolean name="virtualDebug" value="false" />
+  <int name="virtualNpes" value="0" />
+  <boolean name="recplayActive" value="true" />
+  <boolean name="recplayDetailActive" value="false" />
+  <boolean name="record" value="true" />
+  <boolean name="replay" value="false" />
+  <boolean name="recordDetail" value="true" />
+  <boolean name="replayDetail" value="false" />
+  <int name="recplayChecksum" value="0" />
+  <java.lang.String name="selectedPes" value="" />
+</class>

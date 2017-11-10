@@ -168,4 +168,3 @@ vector<CProxy_Node> Parser::createNodeDep(vector<string> stringDepVec) {
 }
 
 #include "../../build/Parser.def.h"
-

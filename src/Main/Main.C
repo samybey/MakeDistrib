@@ -17,13 +17,9 @@ Main::Main(CkArgMsg* msg) {
   // for the user.
   //CkPrintf("Running \"MakeParallele\"");
   CProxy_Parser parser = CProxy_Parser::ckNew(CkMyPe());
+  
   Parser *c=parser.ckLocal();
-  std::vector<StringNode> vecString = c->firstPass(nomMakefile);
-	for (auto i : vecString) {
-		CkPrintf((i.getName()+"\n").c_str());
-	}
-
-  std::vector<CProxy_Node> vecNodes = c->secondPass(vecString);
+  std::vector<CProxy_Node> vecNodes = c->secondPass(c->firstPass(nomMakefile));
 // object is local; directly use members and methods of c
   // Set the mainProxy readonly to point to a
   // proxy for the Main chare object (this
