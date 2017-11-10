@@ -24,7 +24,7 @@ class Node : public CBase_Node {
 			m_dependencesVector.clear();
 		}
 
-		void isGoodName(string nameDep, CkFuture f);
+		void isGoodName(std::string nameDep, CkFuture f);
 
 		std::vector<CProxy_Node> getDependencesVector() {
 			return m_dependencesVector;

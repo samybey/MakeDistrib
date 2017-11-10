@@ -6,7 +6,7 @@ module Node {
 
 	    entry Node(std::string nom, std::vector<CProxy_Node> dependancesVector, std::string commande);
 
-		entry [threaded] void isGoodName(string nameDep, CkFuture f);
+		entry [threaded] void isGoodName(std::string nameDep, CkFuture f);
 
 		entry void setDependencesVector(std::vector<CProxy_Node> dependencesVector);
 

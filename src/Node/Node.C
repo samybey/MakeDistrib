@@ -16,7 +16,7 @@ Node::Node(CkMigrateMessage *msg) {
 
 void Node::isGoodName(string nameDep, CkFuture f) {
 	CkPrintf("Dans isGoodName\n");
-	ok = (nameDep == m_name) ? 1 : 0;
+	int ok = (nameDep == m_name) ? 1 : 0;
 	int_message *m = new int_message(ok);
 	CkSendToFuture(f, m);
 }
