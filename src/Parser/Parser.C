@@ -139,8 +139,7 @@ vector<CProxy_Node> Parser::secondPass(vector<StringNode> firstPassVec) {
 vector<CProxy_Node> Parser::secondPassVecInit(vector<StringNode> firstPassVec) {
 	vector<CProxy_Node> secondPassVec;
 	for (auto strNode : firstPassVec) {
-		secondPassVec.push_back(
-			CProxy_Node::ckNew(strNode.getName(), {}, strNode.getCommand());
+		secondPassVec.push_back(CProxy_Node::ckNew(strNode.getName(), {}, strNode.getCommand()));
 
 	}
 	CkPrintf("finSecondPassVecInit\n");
