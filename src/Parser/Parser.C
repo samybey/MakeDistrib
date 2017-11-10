@@ -140,7 +140,7 @@ vector<CProxy_Node> Parser::secondPassVecInit(vector<StringNode> firstPassVec) {
 	vector<CProxy_Node> secondPassVec;
 	for (auto strNode : firstPassVec) {
 		secondPassVec.push_back(
-			CProxy_Node::ckNew(strNode.getName(), {}, strNode.getCommand(),CkMyPe()));
+			CProxy_Node::ckNew(strNode.getName(), {}, strNode.getCommand());
 
 	}
 	CkPrintf("finSecondPassVecInit\n");
@@ -159,8 +159,9 @@ vector<CProxy_Node> Parser::createNodeDep(vector<string> stringDepVec,
 				CkPrintf("For2CreateNodeDep\n");
 				truc = secondPassNode.isGoodName(strDep);
 				CkPrintf("dskgdslglksfdhkdsf");
+				CkFreeMsg(truc);
 					/*
-				if (->value == 1) {
+				if (truc->value == 1) {
 					depNodeVec.push_back(secondPassNode);
 					break;
 				}*/
