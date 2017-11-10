@@ -1,5 +1,4 @@
 module Parser {
-  extern module StringNode;
   extern module Node;
   chare Parser {
     	entry Parser();

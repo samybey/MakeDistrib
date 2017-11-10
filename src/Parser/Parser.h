@@ -6,6 +6,37 @@
 #include <fstream>
 #include <sstream>
 
+class StringNode {
+	public:
+		/// Constructors ///
+		StringNode(std::string name,
+			std::vector<std::string> dependencesVector,
+			std::string command);
+
+		~StringNode() {
+			m_dependencesVector.clear();
+		}
+
+		/// Entry Methods ///
+		std::string getName() {
+			return m_name;
+		}
+
+		std::vector<std::string> getDependencesVector() {
+			return m_dependencesVector;
+		}
+
+		std::string getCommand() {
+			return m_command;
+		}
+	private:
+		std::string m_name;
+
+		std::vector<std::string> m_dependencesVector;
+
+		std::string m_command;
+};
+
 class Parser : public CBase_Parser {
 	public:
 		/// Constructors ///
@@ -17,11 +48,11 @@ class Parser : public CBase_Parser {
 		/// Entry Methods ///
 		std::string parseFile(char* inputFile);
 
-		std::vector<CProxy_StringNode> firstPass(char* inputFile);
+		std::vector<StringNode> firstPass(char* inputFile);
 
-		std::vector<CProxy_Node> secondPass(std::vector<CProxy_StringNode> firstPassTab);
+		std::vector<CProxy_Node> secondPass(std::vector<StringNode> firstPassTab);
 
-		std::vector<CProxy_Node> secondPassVecInit(std::vector<CProxy_StringNode> firstPassVec);
+		std::vector<CProxy_Node> secondPassVecInit(std::vector<StringNode> firstPassVec);
 
 		std::vector<CProxy_Node> createNodeDep(std::vector<std::string> stringDepVec,
 			std::vector<CProxy_Node> secondPassVec);
