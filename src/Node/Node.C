@@ -1,5 +1,4 @@
 #include "Node.h"
-
 using namespace std;
 
 Node::Node(string name,
@@ -15,9 +14,11 @@ Node::Node(string name,
 Node::Node(CkMigrateMessage *msg) {
 }
 
-int_message * Node::isGoodName(string name) {
-	int ok = (name == m_name) ? 1 : 0;
-	return new int_message(ok);
+void Node::isGoodName(string nameDep, CkFuture f) {
+	CkPrintf("Dans isGoodName\n");
+	ok = (nameDep == m_name) ? 1 : 0;
+	int_message *m = new int_message(ok);
+	CkSendToFuture(f, m);
 }
 
 void Node::exec(CProxy_Node pereProxy) {
@@ -29,6 +30,7 @@ void Node::exec(CProxy_Node pereProxy) {
 }
 
 void Node::execCommand() {
+	CkPrintf("Dans execCommand\n");
 //Ici on exécute la commande Makefile
 	/*pid_t pid;
 	 if ((pid = fork()) > 0) {

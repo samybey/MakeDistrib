@@ -6,10 +6,9 @@
 #include <iostream>
 
 class int_message : public CMessage_int_message {
-	public:
-		int value;
-		int_message(int val) : value(val) {}
-
+    public:
+        int value;
+        int_message(int val) : value(val) {}
 };
 
 class Node : public CBase_Node {
@@ -25,7 +24,7 @@ class Node : public CBase_Node {
 			m_dependencesVector.clear();
 		}
 
-		int_message* isGoodName(std::string name);
+		void isGoodName(string nameDep, CkFuture f);
 
 		std::vector<CProxy_Node> getDependencesVector() {
 			return m_dependencesVector;

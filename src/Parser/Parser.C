@@ -122,13 +122,13 @@ vector<CProxy_Node> Parser::secondPass(vector<StringNode> firstPassVec) {
 		dependencesTemp.clear();
 		dependencesTemp = createNodeDep(strNode.getDependencesVector(),
 			secondPassVec);
-		for (auto secondPassNode : secondPassVec) {
-			CkPrintf("For2SecondPass\n");
-			if (secondPassNode.isGoodName(strNode.getName())->value == 1) {
-				secondPassNode.setDependencesVector(dependencesTemp);
-				break;
-			}
-		}
+		// for (auto secondPassNode : secondPassVec) {
+		// 	CkPrintf("For2SecondPass\n");
+		// 	if (secondPassNode.isGoodName(strNode.getName())->value == 1) {
+		// 		secondPassNode.setDependencesVector(dependencesTemp);
+		// 		break;
+		// 	}
+		// }
 
 	}
 	CkPrintf("finSecondPass\n");
@@ -140,7 +140,7 @@ vector<CProxy_Node> Parser::secondPassVecInit(vector<StringNode> firstPassVec) {
 	vector<CProxy_Node> secondPassVec;
 	for (auto strNode : firstPassVec) {
 		secondPassVec.push_back(
-			CProxy_Node::ckNew(strNode.getName(), {}, strNode.getCommand());
+			CProxy_Node::ckNew(strNode.getName(), {}, strNode.getCommand()));
 
 	}
 	CkPrintf("finSecondPassVecInit\n");
@@ -150,15 +150,24 @@ vector<CProxy_Node> Parser::secondPassVecInit(vector<StringNode> firstPassVec) {
 vector<CProxy_Node> Parser::createNodeDep(vector<string> stringDepVec,
 	vector<CProxy_Node> secondPassVec) {
 	vector<CProxy_Node> depNodeVec;
-	int_message *truc;
+	CkFuture f;
 	if (!stringDepVec.empty()) {
 		for (auto strDep : stringDepVec) {
 			CkPrintf("For1CreateNodeDep\n");
 			for (auto secondPassNode : secondPassVec) {
+				f = CkCreateFuture();
 				CkPrintf("For2CreateNodeDep\n");
-				truc = secondPassNode.isGoodName(strDep);
-				CkPrintf("dskgdslglksfdhkdsf");
-				CkFreeMsg(truc);
+				if (strDep.size()==0){
+					CkPrintf("PAS COOL");
+				}else{
+					CkPrintf(strDep.c_str());
+					secondPassNode.isGoodName(strDep,f);
+					int_message * m = (int_message *) CkWaitFuture(f);
+					int i = m->value;
+					// secondPassNode.execCommand();
+					CkPrintf("dskgdslglksfdhkdsf");
+					delete m;
+				}
 					/*
 				if (truc->value == 1) {
 					depNodeVec.push_back(secondPassNode);
