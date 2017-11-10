@@ -153,6 +153,7 @@ vector<CProxy_Node> Parser::createNodeDep(vector<string> stringDepVec,
 		for (auto strDep : stringDepVec) {
 			CkPrintf("For1CreateNodeDep\n");
 			for (auto secondPassNode : secondPassVec) {
+				//CkPrintf(secondPassNode[1].getName().c_str());CkPrintf(secondPassNode[0].getName().c_str());
 				Node* secondPassNodeLoc = secondPassNode[1].ckLocal();
 				if (secondPassNodeLoc == NULL) {
 					CkPrintf("C'EST CA LE PB\n");
@@ -170,4 +171,3 @@ vector<CProxy_Node> Parser::createNodeDep(vector<string> stringDepVec,
 }
 
 #include "../../build/Parser.def.h"
-
