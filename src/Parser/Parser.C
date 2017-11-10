@@ -139,7 +139,7 @@ vector<CProxy_Node> Parser::secondPassVecInit(vector<StringNode> firstPassVec) {
 	vector<CProxy_Node> secondPassVec;
 	for (auto strNode : firstPassVec) {
 		secondPassVec.push_back(
-			CProxy_Node::ckNew(strNode.getName(), {}, strNode.getCommand(),CkMyPe()));
+			CProxy_Node::ckNew(strNode.getName(), {}, strNode.getCommand());
 
 	}
 	CkPrintf("finSecondPassVecInit\n");
@@ -170,4 +170,3 @@ vector<CProxy_Node> Parser::createNodeDep(vector<string> stringDepVec,
 }
 
 #include "../../build/Parser.def.h"
-
