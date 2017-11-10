@@ -40,7 +40,7 @@ class StringNode {
 class Parser : public CBase_Parser {
 	public:
 		/// Constructors ///
-		Parser();
+		Parser(std::vector<CProxy_Node> vectorNode = {});
 		Parser(CkMigrateMessage *msg);
 		~Parser() {
 		}
@@ -52,10 +52,11 @@ class Parser : public CBase_Parser {
 
 		std::vector<CProxy_Node> secondPass(std::vector<StringNode> firstPassTab);
 
-		std::vector<CProxy_Node> secondPassVecInit(std::vector<StringNode> firstPassVec);
+		void secondPassVecInit(std::vector<StringNode> firstPassVec);
 
-		std::vector<CProxy_Node> createNodeDep(std::vector<std::string> stringDepVec,
-			std::vector<CProxy_Node> secondPassVec);
+		std::vector<CProxy_Node> createNodeDep(std::vector<std::string> stringDepVec);
+
+		std::vector<CProxy_Node> m_vectorNode;
 };
 
 #endif //__PARSER_H__

@@ -1,8 +1,16 @@
 #ifndef __NODE_H__
 #define __NODE_H__
 
+#include "../../build/Node.decl.h"
 #include <string>
 #include <iostream>
+
+class int_message : public CMessage_int_message {
+	public:
+		int value;
+		int_message(int val) : value(val) {}
+
+};
 
 class Node : public CBase_Node {
 
@@ -17,9 +25,7 @@ class Node : public CBase_Node {
 			m_dependencesVector.clear();
 		}
 
-		std::string getName() {
-			return m_name;
-		}
+		int_message* isGoodName(std::string name);
 
 		std::vector<CProxy_Node> getDependencesVector() {
 			return m_dependencesVector;
