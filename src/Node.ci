@@ -14,8 +14,10 @@ module Node {
 	
 		entry [sync] std::string getCommand();
 	
-		entry void exec(CProxy_Node pereProxy);
-		
+		entry void exec(std::vector<std::string> dependencesVector, std::vector<StringNode> stringVec);
+
+		entry void exec(CProxy_Node pereProxy,std::vector<std::string> dependencesVector, std::vector<StringNode> stringVec);
+
 		entry void execCommand();
 		
 		entry void done();

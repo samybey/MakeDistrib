@@ -1,15 +1,10 @@
-#include "../../build/Parser.decl.h"
+#include "StringNode.h"
+#include "Parser.decl.h"
 #include "Parser.h"
 
-#include "../../build/Node.decl.h"
-#include "../Node/Node.h"
+#include "Node.decl.h"
+#include "Node.h"
 using namespace std;
-
-StringNode::StringNode(std::string name,
-	std::vector<std::string> dependencesVector,
-	std::string command) :
-	m_name(name), m_dependencesVector(dependencesVector), m_command(command) {
-}
 
 Parser::Parser(std::vector<CProxy_Node> vectorNode) : m_vectorNode(vectorNode){
 }
@@ -162,5 +157,5 @@ vector<CProxy_Node> Parser::createNodeDep(vector<string> stringDepVec) {
 	return depNodeVec;
 }
 
-#include "../../build/Parser.def.h"
+#include "Parser.def.h"
 

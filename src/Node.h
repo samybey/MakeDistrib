@@ -1,14 +1,16 @@
 #ifndef __NODE_H__
 #define __NODE_H__
-
-#include "../../build/Node.decl.h"
+#include "StringNode.h"
+#include "Node.decl.h"
 #include <string>
 #include <iostream>
 
 class int_message : public CMessage_int_message {
 	public:
 		int value;
-		int_message(int val) : value(val) {}
+		int_message(int val) :
+			value(val) {
+		}
 
 };
 
@@ -40,7 +42,11 @@ class Node : public CBase_Node {
 		}
 
 		/// Entry Methods ///
-		void exec(CProxy_Node pereProxy);
+		void exec(std::vector<std::string> dependencesVector,
+			std::vector<StringNode> stringVec);
+		void exec(CProxy_Node pereProxy,
+			std::vector<std::string> dependencesVector,
+			std::vector<StringNode> stringVec);
 		void execCommand();
 		void done();
 	private:
