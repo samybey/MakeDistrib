@@ -7,7 +7,7 @@ default: all
 all: Main
 
 Main : Main.o Node.o Parser.o
-	$(CHARMDEBUG) $(OPTS) -language charm++ -o Main build/Main.o build/Node.o build/Parser.o 
+	$(CHARMC)  -language charm++ -o Main build/Main.o build/Node.o build/Parser.o 
 
 Main.o : src/Main/Main.C src/Main/Main.h Main.decl.h Main.def.h Node.decl.h Parser.decl.h
 	$(CHARMC) -o build/Main.o src/Main/Main.C
