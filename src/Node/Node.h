@@ -1,6 +1,7 @@
 #ifndef __NODE_H__
 #define __NODE_H__
 
+#include "../../build/Node.decl.h"
 #include <string>
 #include <iostream>
 
