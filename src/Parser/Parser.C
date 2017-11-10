@@ -141,7 +141,7 @@ void Parser::secondPassVecInit(vector<StringNode> firstPassVec) {
 
 vector<CProxy_Node> Parser::createNodeDep(vector<string> stringDepVec) {
 	vector<CProxy_Node> depNodeVec;
-	int_message *truc;
+	int_message *mess;
 	if (!stringDepVec.empty()) {
 		for (auto strDep : stringDepVec) {
 			CkPrintf("For1CreateNodeDep\n");
