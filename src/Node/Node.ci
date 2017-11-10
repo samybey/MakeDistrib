@@ -1,6 +1,6 @@
 module Node {
 
-  chare Node {
+  array[1D] Node {
     entry Node(std::string nom, std::vector<CProxy_Node> dependancesVector, std::string commande);
 
 	entry [sync] std::string getName();
@@ -10,8 +10,6 @@ module Node {
 	entry void setDependencesVector(std::vector<CProxy_Node> dependencesVector);
 
 	entry [sync] std::string getCommand();
-
-	entry void displayNode();
 
 	entry void exec(CProxy_Node pereProxy);
 	

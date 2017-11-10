@@ -43,14 +43,5 @@ void Node::done() {
 	}
 }
 
-void Node::displayNode() {
-	cout << "Target : \n\t" << m_name << "\n";
-	cout << "Dependences : \n";
-	for (auto i : m_dependencesVector) {
-		cout << "\t" << i.getName() << "\n";
-	}
-	cout << "Command : \n\t" << m_command << "\n\n";
-
-}
 
 #include "../../build/Node.def.h"

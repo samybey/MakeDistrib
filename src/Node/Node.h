@@ -33,8 +33,6 @@ class Node : public CBase_Node {
 			return m_command;
 		}
 
-		void displayNode();
-
 		/// Entry Methods ///
 		void exec(CProxy_Node pereProxy);
 		void execCommand();
