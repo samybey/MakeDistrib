@@ -20,6 +20,8 @@ module Node {
 
 		entry void execCommand();
 		
+		entry void setFirst();
+		
 		entry void done();
 	};
 };

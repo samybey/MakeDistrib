@@ -12,8 +12,15 @@ Main::Main(CkArgMsg* msg) {
 	// If there is one, it is the number of "Hello"
 	// chares that should be created.
 	char* nomMakefile = msg->argv[1];
+
 	// We are done with msg so delete it.
 	delete msg;
+
+	CProxy_Parser parser = CProxy_Parser::ckNew(CkMyPe());
+	Parser *c=parser.ckLocal();
+	std::vector<StringNode> vecNodes = c->firstPass(nomMakefile);
+
+
 	CkPrintf("Running \"MakeParallele\"");
 
 	//mainProxy = thisProxy;
@@ -30,8 +37,7 @@ Main::Main(CkArgMsg* msg) {
 
 	CProxy_Node hello = CProxy_Node::ckNew("hello", {helloo, maino},
 		"gcc -o hello/hello hello/hello.o hello/main.o");
-	std::vector<StringNode> stringNodeVec = firstPass(msg->value[1]);
-	std::vector<StringNode>::iterator it = stringNodeVec.begin();
+	std::vector<StringNode>::iterator it = vecNodes.begin();
 	hello.setFirst();
 	hello.exec(it->getDependencesVector(), *it);
 

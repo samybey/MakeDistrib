@@ -49,7 +49,11 @@ class Node : public CBase_Node {
 			std::vector<StringNode> stringVec);
 		void execCommand();
 		void done();
+		void setFirst(){
+			m_first = true;
+		}
 	private:
+		bool m_first = false;
 		std::string m_name;
 		std::vector<CProxy_Node> m_dependencesVector;
 		std::string m_command;

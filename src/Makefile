@@ -5,8 +5,8 @@ CHARMC = $(CHARMDIR)/bin/charmc $(OPTS)
 default: all
 all: Main
 
-Main : Main.o Node.o Parser.o
-	$(CHARMC) -language charm++ -o Main Main.o Node.o Parser.o
+Main : Main.o Node.o Parser.o StringNode.o
+	$(CHARMC) -language charm++ -o Main Main.o Node.o Parser.o StringNode.o
 
 Main.o : Main.C Main.h Main.decl.h Main.def.h Node.decl.h Parser.decl.h
 	$(CHARMC) -o Main.o Main.C
@@ -27,6 +27,9 @@ Parser.o : Parser.C Parser.h Parser.decl.h Parser.def.h
 
 Parser.decl.h Parser.def.h : Parser.ci
 	$(CHARMC) Parser.ci
+	
+StringNode.o : StringNode.h StringNode.cpp
+	$(CHARMC) -o StringNode.o StringNode.cpp
 
 clean:
 	rm -f Main.decl.h Main.def.h Main.o
