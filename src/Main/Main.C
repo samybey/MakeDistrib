@@ -20,7 +20,7 @@ Main::Main(CkArgMsg* msg) {
   Parser *c=parser.ckLocal();
   std::vector<CProxy_Node> vecNodes = c->secondPass(c->firstPass(nomMakefile));
   for (auto n : vecNodes){
-    CkPrintf((n[1].getName()+ "\n").c_str());
+    CkPrintf((n.getName()+ "\n").c_str());
   }
 // object is local; directly use members and methods of c
   // Set the mainProxy readonly to point to a
