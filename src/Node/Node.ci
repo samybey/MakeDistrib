@@ -1,20 +1,23 @@
 module Node {
 
-  array[1D] Node {
-    entry Node(std::string nom, std::vector<CProxy_Node> dependancesVector, std::string commande);
+	message int_message;
 
-	entry [sync] std::string getName();
-
-	entry [sync] std::vector<CProxy_Node> getDependencesVector();
-
-	entry void setDependencesVector(std::vector<CProxy_Node> dependencesVector);
-
-	entry [sync] std::string getCommand();
-
-	entry void exec(CProxy_Node pereProxy);
+	chare Node {
+  
+	    entry Node(std::string nom, std::vector<CProxy_Node> dependancesVector, std::string commande);
 	
-	entry void execCommand();
+		entry [sync] int_message* isGoodName(std::string name);
 	
-	entry void done();
-  };
+		entry [sync] std::vector<CProxy_Node> getDependencesVector();
+	
+		entry void setDependencesVector(std::vector<CProxy_Node> dependencesVector);
+	
+		entry [sync] std::string getCommand();
+	
+		entry void exec(CProxy_Node pereProxy);
+		
+		entry void execCommand();
+		
+		entry void done();
+	};
 };

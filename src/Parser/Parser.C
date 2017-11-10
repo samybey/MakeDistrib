@@ -2,6 +2,7 @@
 #include "Parser.h"
 
 #include "../../build/Node.decl.h"
+#include "../Node/Node.h"
 using namespace std;
 
 StringNode::StringNode(std::string name,
@@ -123,8 +124,8 @@ vector<CProxy_Node> Parser::secondPass(vector<StringNode> firstPassVec) {
 			secondPassVec);
 		for (auto secondPassNode : secondPassVec) {
 			CkPrintf("For2SecondPass\n");
-			if (secondPassNode[1].getName() == strNode.getName()) {
-				secondPassNode[1].setDependencesVector(dependencesTemp);
+			if (secondPassNode.isGoodName(strNode.getName())->value == 1) {
+				secondPassNode.setDependencesVector(dependencesTemp);
 				break;
 			}
 		}
@@ -149,21 +150,22 @@ vector<CProxy_Node> Parser::secondPassVecInit(vector<StringNode> firstPassVec) {
 vector<CProxy_Node> Parser::createNodeDep(vector<string> stringDepVec,
 	vector<CProxy_Node> secondPassVec) {
 	vector<CProxy_Node> depNodeVec;
+	int_message *truc;
 	if (!stringDepVec.empty()) {
 		for (auto strDep : stringDepVec) {
 			CkPrintf("For1CreateNodeDep\n");
 			for (auto secondPassNode : secondPassVec) {
-				//CkPrintf(secondPassNode[1].getName().c_str());CkPrintf(secondPassNode[0].getName().c_str());
-				Node* secondPassNodeLoc = secondPassNode[1].ckLocal();
-				if (secondPassNodeLoc == NULL) {
-					CkPrintf("C'EST CA LE PB\n");
-				} else {
-					CkPrintf("For2CreateNodeDep\n");
-					if (secondPassNode[1].getName() == strDep) {
-						depNodeVec.push_back(secondPassNode);
-						break;
-					}
-				}
+
+				CkPrintf("For2CreateNodeDep\n");
+				truc = secondPassNode.isGoodName(strDep);
+				CkPrintf("dskgdslglksfdhkdsf");
+					/*
+				if (->value == 1) {
+					depNodeVec.push_back(secondPassNode);
+					break;
+				}*/
+
+
 			}
 		}
 	}
