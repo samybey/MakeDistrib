@@ -26,19 +26,18 @@ Main::Main(CkArgMsg* msg) {
 	//mainProxy = thisProxy;
 
 	/******* NOTE: listNodes[1].exec(thisProxy); **********/
-	CProxy_Node fils11 = CProxy_Node::ckNew("fils11", {}, "echo \"Hello world fils 11\"");
-	CProxy_Node fils1 = CProxy_Node::ckNew("fils1", {fils11}, "echo \"Hello world fils 1\"");
+	CProxy_Node helloo  = CProxy_Node::ckNew("hello.o", {}, "gcc -o hello/hello.o -c hello/hello.c -W -Wall -ansi -pedantic");
 
 
-	CProxy_Node fils2 = CProxy_Node::ckNew("fils2", {}, "echo \"Hello world fils 2\"");
+	CProxy_Node maino = CProxy_Node::ckNew("main.o", {}, "gcc -o hello/main.o -c hello/main.c -W -Wall -ansi -pedantic");
 	/*std::vector<CProxy_Node> dependencesVector;
 	dependencesVector.push_back(fils1);
 	dependencesVector.push_back(fils2);*/
 
 
-	CProxy_Node nodeInit = CProxy_Node::ckNew("bill", {fils1, fils2}, "echo \"Hello world padre\"");
-	nodeInit.setFirst();
-	nodeInit.exec();
+	CProxy_Node hello = CProxy_Node::ckNew("hello", {helloo, maino}, "gcc -o hello/hello hello/hello.o hello/main.o");
+	hello.setFirst();
+	hello.exec();
 }
 
 // Constructor needed for chare object migration (ignore for now)
