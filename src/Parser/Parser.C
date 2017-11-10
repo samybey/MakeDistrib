@@ -86,9 +86,7 @@ vector<CProxy_StringNode> Parser::firstPass(char* inputFile) {
 				}
 				i++;
 			}
-			vec.push_back(
-				CProxy_StringNode::ckNew(target, dependencesVector, command,
-					CkMyPe()));
+			vec.push_back(CProxy_StringNode::ckNew(target, dependencesVector, command,CkMyPe()));
 			makefile = match.suffix().str();
 		}
 	} catch (const regex_error &e) {
