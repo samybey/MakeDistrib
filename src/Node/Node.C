@@ -16,6 +16,11 @@ Node::Node(string name,
 Node::Node(CkMigrateMessage *msg) {
 }
 
+int_message * Node::isGoodName(string name) {
+	int ok = (name == m_name) ? 1 : 0;
+	return new int_message(ok);
+}
+
 void Node::exec(CProxy_Node pereProxy) {
 	m_pereProxy = pereProxy;
 	for (auto i : m_dependencesVector) {
