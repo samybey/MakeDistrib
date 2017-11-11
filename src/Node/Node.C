@@ -22,6 +22,9 @@ Node::Node(string name,
 
 Node::Node(CkMigrateMessage *msg) {
 }
+void Node::firstExec() {
+
+}
 
 void Node::exec(CProxy_Node pereProxy) {
 }

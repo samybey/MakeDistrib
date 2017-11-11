@@ -49,6 +49,7 @@ class Node : public CBase_Node {
 		}
 
 		/// Entry Methods ///
+		void firstExec();
 		void exec(CProxy_Node pereProxy);
 		void execCommand();
 		void done();

@@ -6,6 +6,8 @@ module Node {
   
 		entry Node(std::string name, std::vector<StringNode> stringNodeVec,	std::vector<std::string> dependencesVector,	std::string command, int countDone);
 		
+		entry void firstExec();
+		
 		entry void exec(CProxy_Node pereProxy);
 		
 		entry void execCommand();
