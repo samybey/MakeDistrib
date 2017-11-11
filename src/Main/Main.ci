@@ -1,8 +1,27 @@
- mainmodule Main {
-  extern module Node;
-  mainchare Main {
-    entry Main(CkArgMsg* msg);
-    entry void done();
-  };
+mainmodule Main {
+	
+	class StringNode;
+	
+	mainchare Main {
+	
+		entry Main(CkArgMsg* msg);
+	
+		entry void done();
+	};
+	
+	chare Node {
+	
+		entry Node(std::string name, std::vector<std::string> dependencesVector, std::string command);
+		
+		entry void exec(std::vector<StringNode> stringNodeVec);
+		
+		entry void exec(CProxy_Node pereProxy, std::vector<StringNode> stringNodeVec);
+		
+		entry void execCommand();
+		
+		entry void done();
+		
+		entry void display();
+	};
 
 };

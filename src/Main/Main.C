@@ -1,11 +1,95 @@
-#include "../Node/Node.h"
 #include "../../build/Main.decl.h"
 #include "Main.h"
 
-#include "../../build/Node.decl.h"
-
 using namespace std;
+StringNode::StringNode(string name,
+	vector<string> dependencesVector,
+	string command) :
+	m_name(name), m_dependencesVector(dependencesVector), m_command(command) {
+}
 
+Node::Node(string name, vector<string> dependencesVector, string command) :
+	m_name(name), m_dependencesVector(dependencesVector), m_command(command) {
+}
+
+Node::Node(CkMigrateMessage *msg) {
+}
+
+void Node::exec(vector<StringNode> stringNodeVec) {
+	CkPrintf("Coucou\n");
+	m_isFirst = true;
+	bool isADep;
+	StringNode target;
+	CProxy_Node childProxyNode;
+	if (m_dependencesVector.size() != 0) {
+		for (auto dep : m_dependencesVector) {
+			isADep = false;
+			target = {};
+			for (auto targetStringNode : stringNodeVec) {
+				if (dep == targetStringNode.getName()) {
+					isADep = true;
+					target = targetStringNode;
+				}
+			}
+			if (isADep) {
+				childProxyNode = CProxy_Node::ckNew(target.getName(),
+					target.getDependencesVector(),
+					target.getCommand());
+				childProxyNode.exec(thisProxy, stringNodeVec);
+			}
+		}
+	}
+	execCommand();
+
+}
+
+void Node::exec(CProxy_Node pereProxy, vector<StringNode> stringNodeVec) {
+	m_pereProxy = pereProxy;
+	bool isADep;
+	StringNode target;
+	CProxy_Node childProxyNode;
+	if (m_dependencesVector.size() != 0) {
+		for (auto dep : m_dependencesVector) {
+			isADep = false;
+			target = {};
+			for (auto targetStringNode : stringNodeVec) {
+				if (dep == targetStringNode.getName()) {
+					isADep = true;
+					target = targetStringNode;
+				}
+			}
+			if (isADep) {
+				childProxyNode = CProxy_Node::ckNew(target.getName(),
+					target.getDependencesVector(),
+					target.getCommand());
+				childProxyNode.exec(thisProxy, stringNodeVec);
+			}
+		}
+	}
+	execCommand();
+}
+
+void Node::execCommand() {
+	system(m_command.c_str());
+	if (m_isFirst) {
+		CkExit();
+	} else {
+		m_pereProxy.done();
+	}
+}
+
+void Node::done() {
+	m_countDone++;
+	if (m_countDone >= m_dependencesVector.size()) {
+		execCommand();
+	}
+}
+
+void Node::display() {
+	CkPrintf("aaaa\n");
+	CkPrintf((m_name + "\n").c_str());
+
+}
 //========================================================================================
 //===================================    PARSER   ========================================
 //========================================================================================
@@ -101,7 +185,6 @@ vector<StringNode> firstPass(char* inputFile) {
 //====================================    MAIN   =========================================
 //========================================================================================
 
-
 // Entry point of Charm++ application
 Main::Main(CkArgMsg* msg) {
 
@@ -109,9 +192,20 @@ Main::Main(CkArgMsg* msg) {
 
 	delete msg;
 
-	std::vector < StringNode > vecNodes = firstPass(nomMakefile);
-	CProxy_Node first = CProxy_Node::ckNew();
-	first.fistExec();
+	vector < StringNode > vecNodes = firstPass(nomMakefile);
+	StringNode firstStringNode;
+	firstStringNode = vecNodes.front();
+
+	CProxy_Node firstNode = CProxy_Node::ckNew(firstStringNode.getName(),
+		firstStringNode.getDependencesVector(), firstStringNode.getCommand());
+	CkPrintf("après le std new\n");
+	cout << vecNodes.size();
+	for (vector<StringNode>::iterator i = vecNodes.begin(); i != vecNodes.end();
+		++i) {
+		CkPrintf((i->getName() + "\n").c_str());
+	}
+
+	firstNode.exec(vecNodes);
 
 }
 
