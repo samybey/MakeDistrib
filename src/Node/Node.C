@@ -2,11 +2,19 @@
 
 using namespace std;
 
+StringNode::StringNode(std::string name,
+	std::vector<std::string> dependencesVector,
+	std::string command) :
+	m_name(name), m_dependencesVector(dependencesVector), m_command(command) {
+}
+
 Node::Node(string name,
-	vector<CProxy_Node> dependencesVector,
+	vector<StringNode> stringNodeVec,
+	vector<string> dependencesVector,
 	string command,
 	int countDone) :
 		m_name(name),
+		m_stringNodeVec(stringNodeVec),
 		m_dependencesVector(dependencesVector),
 		m_command(command),
 		m_countDone(countDone) {
@@ -15,18 +23,7 @@ Node::Node(string name,
 Node::Node(CkMigrateMessage *msg) {
 }
 
-int_message* Node::isGoodName(string name) {
-
-	int ok = (name == m_name) ? 1 : 0;
-	return new int_message(ok);
-}
-
 void Node::exec(CProxy_Node pereProxy) {
-	m_pereProxy = pereProxy;
-	for (auto i : m_dependencesVector) {
-		i.exec(thisProxy);
-	}
-	execCommand();
 }
 
 void Node::execCommand() {
@@ -34,11 +31,6 @@ void Node::execCommand() {
 }
 
 void Node::done() {
-	m_countDone++;
-//Sauvegarder le fichier sur la mémoire du proc
-	if (m_countDone >= m_dependencesVector.size()) {
-		execCommand();
-	}
 }
 
 

@@ -1,19 +1,11 @@
 module Node {
 
-	message int_message;
-
+	class StringNode;
+	
 	chare Node {
   
-	    entry Node(std::string nom, std::vector<CProxy_Node> dependancesVector, std::string commande);
-	
-		entry [sync] int_message* isGoodName(std::string name);
-	
-		entry [sync] std::vector<CProxy_Node> getDependencesVector();
-	
-		entry void setDependencesVector(std::vector<CProxy_Node> dependencesVector);
-	
-		entry [sync] std::string getCommand();
-	
+		entry Node(std::string name, std::vector<StringNode> stringNodeVec,	std::vector<std::string> dependencesVector,	std::string command, int countDone);
+		
 		entry void exec(CProxy_Node pereProxy);
 		
 		entry void execCommand();

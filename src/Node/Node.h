@@ -5,11 +5,34 @@
 #include <string>
 #include <iostream>
 
-class int_message : public CMessage_int_message {
+class StringNode {
 	public:
-		int value;
-		int_message(int val) : value(val) {}
+		/// Constructors ///
+		StringNode(std::string name,
+			std::vector<std::string> dependencesVector,
+			std::string command);
 
+		~StringNode() {	}
+
+		/// Entry Methods ///
+		std::string getName() {
+			return m_name;
+		}
+
+		std::vector<std::string> getDependencesVector() {
+			return m_dependencesVector;
+		}
+
+		std::string getCommand() {
+			return m_command;
+		}
+
+	private:
+		std::string m_name;
+
+		std::vector<std::string> m_dependencesVector;
+
+		std::string m_command;
 };
 
 class Node : public CBase_Node {
@@ -17,26 +40,12 @@ class Node : public CBase_Node {
 	public:
 		/// Constructors ///
 		Node(std::string name,
-			std::vector<CProxy_Node> dependancesVector,
+			std::vector<StringNode> stringNodeVec,
+			std::vector<std::string> dependencesVector,
 			std::string command,
 			int countDone = 0);
 		Node(CkMigrateMessage *msg);
 		~Node() {
-			m_dependencesVector.clear();
-		}
-
-		int_message* isGoodName(std::string name);
-
-		std::vector<CProxy_Node> getDependencesVector() {
-			return m_dependencesVector;
-		}
-
-		void setDependencesVector(std::vector<CProxy_Node> dependencesVector) {
-			m_dependencesVector = dependencesVector;
-		}
-
-		std::string getCommand() {
-			return m_command;
 		}
 
 		/// Entry Methods ///
@@ -45,7 +54,8 @@ class Node : public CBase_Node {
 		void done();
 	private:
 		std::string m_name;
-		std::vector<CProxy_Node> m_dependencesVector;
+		std::vector<StringNode> m_stringNodeVec;
+		std::vector<std::string> m_dependencesVector;
 		std::string m_command;
 		int m_countDone;
 		CProxy_Node m_pereProxy;

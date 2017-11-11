@@ -1,49 +1,125 @@
+#include "../Node/Node.h"
 #include "../../build/Main.decl.h"
 #include "Main.h"
 
 #include "../../build/Node.decl.h"
-#include "../../build/Parser.decl.h"
-#include "../Parser/Parser.h"
+
+using namespace std;
+
+//========================================================================================
+//===================================    PARSER   ========================================
+//========================================================================================
+
+string parseFile(char* inputFile) {
+
+	ifstream file("test/Makefile", ios::in);  // on ouvre le fichier en lecture
+	string makefile = "";
+
+	if (file)  // si l'ouverture a réussi
+
+	{
+		stringstream buffer; // variable contenant l'intégralité du fichier
+		// copier l'intégralité du fichier dans le buffer
+		buffer << file.rdbuf();
+		// nous n'avons plus besoin du fichier !
+		file.close();
+		// manipulations du buffer...
+		/* << "Taille du buffer : " << buffer.str().size() << '\n'; */
+		makefile = buffer.str();
+
+		file.close();
+	} else
+		// sinon
+		cerr << "Impossible d'ouvrir le fichier !" << endl;
+	return makefile;
+}
+
+vector<StringNode> firstPass(char* inputFile) {
+
+	string makefile = parseFile(inputFile);
+	smatch match;
+	vector < StringNode > vec;
+
+	string target;
+	vector < string > dependencesVector;
+	string command;
+
+	int i;
+	string dependence = "";
+	string rest;
+
+	try {
+		regex reg(
+			"(?:([\\w]+(?:.[\\w]+)?):(?: ([\\w. ]+))?\\n\\t([\\w. -_]+)(?:\\n|$)+)",
+			regex_constants::ECMAScript);
+		while (regex_search(makefile, match, reg)) {
+			i = 0;
+			target = "";
+			dependencesVector.clear();
+			dependence = "";
+			command = "";
+
+			for (auto x : match) {
+				switch (i) {
+				case 0: //match global
+					break;
+				case 1: //cible
+					target = x;
+					break;
+				case 2: //dependences
+					rest = x.str();
+					dependence = rest.substr(0, rest.find(" "));
+					while (dependence != rest) {
+						dependencesVector.push_back(dependence);
+						rest = rest.substr(rest.find(" ") + 1, rest.size() - 1);
+						dependence = rest.substr(0, rest.find(" "));
+
+					}
+					dependencesVector.push_back(rest);
+					break;
+				case 3: //commande
+					command = x;
+				default: //autre match => erreur
+					break;
+				}
+				i++;
+			}
+			vec.push_back({target, dependencesVector, command});
+			makefile = match.suffix().str();
+		}
+	} catch (const regex_error &e) {
+		cout << "error :" << "\n";
+		cout << e.what();
+		if (e.code() == regex_constants::error_brack) {
+			cout << "The code was error_brack\n";
+		}
+	}
+	return vec;
+}
+
+//========================================================================================
+//====================================    MAIN   =========================================
+//========================================================================================
+
 
 // Entry point of Charm++ application
 Main::Main(CkArgMsg* msg) {
-  // There should be 0 or 1 command line arguments.
-  // If there is one, it is the number of "Hello"
-  // chares that should be created.
-  char* nomMakefile  = msg->argv[1];
-  // We are done with msg so delete it.
-  delete msg;
-  // Display some info about this execution
-  // for the user.
-  //CkPrintf("Running \"MakeParallele\"");
-  CProxy_Parser parser = CProxy_Parser::ckNew(CkMyPe());
-  
-  Parser *c=parser.ckLocal();
-  std::vector<CProxy_Node> vecNodes = c->secondPass(c->firstPass(nomMakefile));
-// object is local; directly use members and methods of c
-  // Set the mainProxy readonly to point to a
-  // proxy for the Main chare object (this
-  // chare object).
-  //mainProxy = thisProxy;
 
-  // Create the array of Hello chare objects. NOTE: The
-  // 'helloArray' object that is returned by 'ckNew()' is
-  // actually a Proxy object to the array.
-  // CProxy_Node nodeInit = CProxy_Node::ckNew(1); //changer paramètres
+	char* nomMakefile = msg->argv[1];
 
-  /******* NOTE: Parser le Makefile ************/
-  /******* NOTE: listNodes[1].exec(thisProxy); **********/
+	delete msg;
+
+	std::vector < StringNode > vecNodes = firstPass(nomMakefile);
+	CProxy_Node first = CProxy_Node::ckNew();
+	first.fistExec();
+
 }
 
-// Constructor needed for chare object migration (ignore for now)
-// NOTE: This constructor does not need to appear in the ".ci" file
 Main::Main(CkMigrateMessage* msg) {
 }
 
-// When called, the "done()" entry method will cause the program
-// to exit.
 void Main::done() {
-  CkExit();
+	CkExit();
 }
 
 #include "../../build/Main.def.h"
