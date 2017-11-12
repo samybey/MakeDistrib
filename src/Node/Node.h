@@ -22,9 +22,11 @@ class Node : public CBase_Node {
 
 		/// Entry Methods ///
 		void exec(CProxy_Node pereProxy);
+		void exec();
 		void execCommand();
 		void done();
 	private:
+		bool m_first = false;
 		std::string m_name;
 		std::vector<CProxy_Node> m_dependencesVector;
 		std::string m_command;

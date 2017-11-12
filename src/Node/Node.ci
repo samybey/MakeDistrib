@@ -7,6 +7,8 @@ module Node {
 		entry void addDependence(CProxy_Node dep);
 
 		entry void exec(CProxy_Node pereProxy);
+		
+		entry void exec();
 
 		entry void execCommand();
 

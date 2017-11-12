@@ -1,8 +1,8 @@
 hello: hello.o main.o
-	gcc -o hello hello.o main.o
+	gcc -o test/hello test/hello.o test/main.o
 
-hello.o: hello.c
-	gcc -o hello.o -c hello.c -W -Wall -ansi -pedantic
+hello.o: test/hello.c
+	gcc -o test/hello.o -c test/hello.c -W -Wall -ansi -pedantic
 
-main.o: main.c hello.h
-	gcc -o main.o -c main.c -W -Wall -ansi -pedantic
+main.o: test/main.c test/hello.h
+	gcc -o test/main.o -c test/main.c -W -Wall -ansi -pedantic

@@ -22,7 +22,7 @@ StringNode::StringNode(string name,
 
 string parseFile(char* inputFile) {
 
-	ifstream file("test/Makefile", ios::in);  // on ouvre le fichier en lecture
+	ifstream file(inputFile, ios::in);  // on ouvre le fichier en lecture
 	string makefile = "";
 
 	if (file)  // si l'ouverture a réussi
@@ -120,7 +120,6 @@ map<string, CProxy_Node> secondPassMapInit(vector<StringNode> firstPassVec) {
 			{}, strNode.getCommand());
 
 	}
-	CkPrintf("finSecondPassMapInit\n");
 	return secondPassMap;
 }
 
@@ -129,10 +128,7 @@ vector<CProxy_Node> createNodeDep(vector<string> stringDepVec,
 	vector < CProxy_Node > depNodeVec;
 	if (!stringDepVec.empty()) {
 		for (auto strDep : stringDepVec) {
-			CkPrintf("For1CreateNodeDep\n");
 			for (auto secondPassNodePair : secondPassMap) {
-				CkPrintf("For2CreateNodeDep\n");
-
 				if (strDep == secondPassNodePair.first) {
 					depNodeVec.push_back(secondPassNodePair.second);
 					break;
@@ -151,18 +147,15 @@ void setDependencesVector(CProxy_Node nodeProxy, vector<CProxy_Node> depVec){
 }
 
 map<string, CProxy_Node> secondPass(vector<StringNode> firstPassVec) {
-	CkPrintf("debutSecondPass\n");
 	//Initialisation du vec de node
 	map < string, CProxy_Node > secondPassMap = secondPassMapInit(firstPassVec);
 	vector < CProxy_Node > dependencesTemp;
 	//ajout des dependences
 	for (StringNode strNode : firstPassVec) {
-		CkPrintf("For1SecondPass\n");
 		dependencesTemp.clear();
 		dependencesTemp = createNodeDep(strNode.getDependencesVector(),
 			secondPassMap);
 		 for (auto secondPassNodePair : secondPassMap) {
-		 	CkPrintf("For2SecondPass\n");
 		 	if (strNode.getName() == secondPassNodePair.first) {
 		 		setDependencesVector(secondPassNodePair.second,dependencesTemp);
 		 		break;
@@ -170,7 +163,6 @@ map<string, CProxy_Node> secondPass(vector<StringNode> firstPassVec) {
 		 }
 
 	}
-	CkPrintf("finSecondPass\n");
 	return secondPassMap;
 
 }
@@ -186,7 +178,7 @@ Main::Main(CkArgMsg* msg) {
 
 	map < string, CProxy_Node > nodesMap = secondPass(firstPass(nomMakefile));
 
-	CkExit();
+	nodesMap.begin()->second.exec();
 
 }
 
