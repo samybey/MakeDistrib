@@ -5,12 +5,6 @@
 #include <string>
 #include <iostream>
 
-class int_message : public CMessage_int_message {
-    public:
-        int value;
-        int_message(int val) : value(val) {}
-};
-
 class Node : public CBase_Node {
 
 	public:
@@ -24,19 +18,7 @@ class Node : public CBase_Node {
 			m_dependencesVector.clear();
 		}
 
-		void isGoodName(std::string nameDep, CkFuture f);
-
-		std::vector<CProxy_Node> getDependencesVector() {
-			return m_dependencesVector;
-		}
-
-		void setDependencesVector(std::vector<CProxy_Node> dependencesVector) {
-			m_dependencesVector = dependencesVector;
-		}
-
-		std::string getCommand() {
-			return m_command;
-		}
+		void addDependence(CProxy_Node dep);
 
 		/// Entry Methods ///
 		void exec(CProxy_Node pereProxy);

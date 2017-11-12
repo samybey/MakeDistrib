@@ -1,7 +1,8 @@
  mainmodule Main {
+ 
+ class StringNode;
 
   extern module Node;
-  extern module Parser;
 
   mainchare Main {
     entry Main(CkArgMsg* msg);

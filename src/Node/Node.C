@@ -14,13 +14,6 @@ Node::Node(string name,
 Node::Node(CkMigrateMessage *msg) {
 }
 
-void Node::isGoodName(string nameDep, CkFuture f) {
-	CkPrintf("Dans isGoodName\n");
-	int ok = (nameDep == m_name) ? 1 : 0;
-	int_message *m = new int_message(ok);
-	CkSendToFuture(f, m);
-}
-
 void Node::exec(CProxy_Node pereProxy) {
 	m_pereProxy = pereProxy;
 	for (auto i : m_dependencesVector) {
@@ -49,5 +42,8 @@ void Node::done() {
 	}
 }
 
+void Node::addDependence(CProxy_Node dep){
+	m_dependencesVector.push_back(dep);
+}
 
 #include "../../build/Node.def.h"

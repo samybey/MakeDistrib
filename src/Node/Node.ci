@@ -1,14 +1,10 @@
 module Node {
 
-	message int_message;
-
 	chare Node {
 
 	    entry Node(std::string nom, std::vector<CProxy_Node> dependancesVector, std::string commande);
 
-		entry [threaded] void isGoodName(std::string nameDep, CkFuture f);
-
-		entry void setDependencesVector(std::vector<CProxy_Node> dependencesVector);
+		entry void addDependence(CProxy_Node dep);
 
 		entry void exec(CProxy_Node pereProxy);
 
