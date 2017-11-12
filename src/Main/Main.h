@@ -37,7 +37,7 @@ class StringNode{
 
 		std::string m_command = "";
 };
-PUPbytes(StringNode);
+PUPbytes(StringNode)
 
 class Node : public CBase_Node {
 

@@ -2,11 +2,23 @@
 #include "Main.h"
 
 using namespace std;
+
+
+
+//========================================================================================
+//=================================    STRINGNODE   ======================================
+//========================================================================================
+
+
 StringNode::StringNode(string name,
 	vector<string> dependencesVector,
 	string command) :
 	m_name(name), m_dependencesVector(dependencesVector), m_command(command) {
 }
+
+//========================================================================================
+//====================================    NODE   =========================================
+//========================================================================================
 
 Node::Node(string name, vector<string> dependencesVector, string command) :
 	m_name(name), m_dependencesVector(dependencesVector), m_command(command) {
