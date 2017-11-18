@@ -1,13 +1,11 @@
-POUR COMMENCER  : 
+VERSION DU COMPILATEUR :
 
-Beyou & Follet  : Parser
+GCC 4.9.0 et supérieurs
 
-Trompette & Gaunet : Charm++
+COMPILATION :
 
-RAPPORT : 
+Lancer 'make' dans le répetoire principal, l'exécutable sera créé dans le dossier 'test' qui contient un projet simple "hello world".
 
-sur sharelatex
+EXECUTION DU TEST:
 
-PRÉSENTATION ORALE : 
-
-Dans le git, libreoffice
+aller dans le répertoire 'test' et executer la commande './Main Makefile' puis executer './hello'.
