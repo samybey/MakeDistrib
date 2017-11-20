@@ -7,7 +7,7 @@ default: all
 all: Main
 
 Main : Main.o Node.o
-	$(CHARMC) -language charm++ -o test/Main build/Main.o build/Node.o
+	$(CHARMC) -tracemode projections -language charm++ -o test/Main build/Main.o build/Node.o
 
 Main.o : src/Main/Main.C src/Main/Main.h Main.decl.h Main.def.h Node.decl.h
 	$(CHARMC) -o build/Main.o src/Main/Main.C
