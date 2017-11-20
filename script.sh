@@ -17,4 +17,4 @@ cat $OAR_NODEFILE > ~/.nodelisttemp
 while read p; do
     echo 'host ' >> ~/.nodelist
     echo $p >> ~/.nodelist
-done
+done  < ~/.nodelisttemp
