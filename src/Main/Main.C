@@ -60,7 +60,7 @@ vector<StringNode> firstPass(char* inputFile) {
 
 	try {
 		regex reg(
-		     "(?:([\\w]+(?:.[\\w]+)?):(?:(?:\\t| )([\\w. ]+))?\\n\\t([^\\n]+)(?:\\n|$)+)",
+		     "(?:([\\w\\-]+(?:.[\\w\\-]+)?)(?:[ \\t])*:(?:[ \\t])*(?:(?:\\t| )([\\w. \\t\\-]+))?\\n\\t([\\w. \\-_\\|<>';*/`=\\[\\]]+)(?:\\n|$)+)",
 			regex_constants::ECMAScript);
 		while (regex_search(makefile, match, reg)) {
 			i = 0;
