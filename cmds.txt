@@ -17,4 +17,4 @@ make
 
 puis dans le dossier test:
 
-./../charmrun +p16 ++remote-shell oarsh ./Main Makefile + isomalloc_sync
+./../charmrun +p8 ++remote-shell oarsh ./Main Makefile +isomalloc_sync
