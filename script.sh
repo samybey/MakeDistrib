@@ -5,7 +5,7 @@ oarsub -I -l nodes=2,walltime=0:30
 cd ..
 git clone http://charm.cs.illinois.edu/gerrit/charm.git
 cd charm
-./build charm++ netlrts-linux-x86_64 --with-production
+./build charm++ netlrts-linux-x86_64
 cd ..
 sudo-g5k apt-get --assume-yes install gradle
 git clone http://charm.cs.uiuc.edu/gerrit/projections
