@@ -1,3 +1,4 @@
+cd test/makefiles/premier
 for i in `seq 1 3 40`;
 do
     touch time$i.log
