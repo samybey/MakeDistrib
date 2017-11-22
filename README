@@ -4,8 +4,10 @@ GCC 4.9.0 et supérieurs
 
 SCRIPTS:
 
-Déployer les outils nécessaires à l'exécution des tests : deploiement.sh
+deploiement.sh : Déployer les outils nécessaires à l'exécution des tests
 Lancer deploiement.sh une fois situé dans une des machines allouée par grid5000
 quand le dossier a été cloné à partir de git.
 
-Tester la solution: temps.sh
+temps.sh : Tester la solution
+
+nodelist.sh : Lorsque l'outil a été déployé au préalable permet d'uniquement changer les hosts contenu dans le fichier .nodelist (nécessaire au bon fonctionnement du logiciel)
