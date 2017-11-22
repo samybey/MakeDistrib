@@ -8,8 +8,12 @@
 #5                   245.15
 #7                   214.78
 
+<<<<<<< HEAD
+cd test/makefiles/premier
+=======
 
 cd test/premier
+>>>>>>> 4e3ac4a1191c5b0f4e625051a2821482246114cf
 #Format pour n avoir que le temps real
 TIMEFORMAT=%R
 #SUPPRESSION DES FICHIERS TEMPORAIRES
