@@ -1,3 +1,4 @@
+ls
 cd test/makefiles/premier
 for i in `seq 8 3 25`;
 do
