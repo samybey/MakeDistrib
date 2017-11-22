@@ -1,0 +1,2 @@
+sudo-g5k apt-get install gnuplot;
+gnuplot -e "set datafile separator \"\t\"; set title \"Temps d'execution en fonction du nombre de coeurs (Premier)\";set xlabel \"Nombre de coeurs\";set ylabel \"Temps d'execution (secondes)\";plot \"timetest.txt\"using 1:2 title 'serie 1',  \"timetest.txt\"using 1:3 title 'serie 2', \"timetest.txt\"using 1:4 title 'serie 3', \"timetest.txt\" using 1:5 title 'make GNU'; pause 10 "

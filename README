@@ -1,11 +1,43 @@
-VERSION DU COMPILATEUR :
+-------------VERSION DU COMPILATEUR----------------
 
-GCC 4.9.0 et supérieurs
+C++:
+GCC 4.9.0 et +
 
-SCRIPTS:
+Charm++:
+CharmC v6 et +
 
-Déployer les outils nécessaires à l'exécution des tests : deploiement.sh
-Lancer deploiement.sh une fois situé dans une des machines allouée par grid5000
-quand le dossier a été cloné à partir de git.
+-------------SCRIPTS--------------------------------
 
-Tester la solution: temps.sh
+deploiement.sh : 
+Déployer l'environnement sur la plateforme grid5000, une fois les noeuds alloués, quand les sources du projets ont été cloné à partir de git.
+
+nodelist.sh
+Permet de mettre à jour le fichier ~/.nodelist avec les nodes actuellement reservés par l'utilisateur.
+
+premier.sh
+Automatise l'execution du makefile des nombres premiers de 5 a 25 coeurs. Les temps de sortie sont disponibles dans les logs.
+
+temps.sh :
+Execute le makefile des nombres premiers de 5 a 25 processeurs. Il n'est actuellement pas entierement fonctionnel. Le probleme semblerait venir de la fonction time et du format de sortie de ses resultats.
+L'execution " a la main " en ligne de commande fonctionne cependant.
+
+plot.sh :
+Trace les courbes enregistrées dans le fichier time.txt a la racine du projet.
+Le format attendu dans ce fichier est le suivant -exemple- :
+#nombre de coeurs      serie1 (temps sec)	  serie2
+5	   	       245.23 	     		  211.11
+8		       298.32			  178.21
+
+Il appele l'outil gnuplot qui trace des courbes directement a l'aide du fichier time.txt
+
+------------REMARQUES-----------------------------
+
+Il se peut que le script deploiement.sh ne fonctionne pas entierement comme voulu et n'effectue pas bien le mkdir build, nécessaire a la compilation du make distribué. Dans ce cas le creer:
+
+mkdir build
+
+De meme pour le fichier log:
+
+mkdir log
+
+
