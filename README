@@ -17,6 +17,9 @@ Permet de mettre à jour le fichier ~/.nodelist avec les nodes actuellement rese
 premier.sh
 Automatise l'execution du makefile des nombres premiers de 5 a 25 coeurs. Les temps de sortie sont disponibles dans les logs.
 
+intervalle.sh
+Permet de lancer 30 exécutions du test premier sur 15 coeurs
+
 temps.sh :
 Execute le makefile des nombres premiers de 5 a 25 processeurs. Il n'est actuellement pas entierement fonctionnel. Le probleme semblerait venir de la fonction time et du format de sortie de ses resultats.
 L'execution " a la main " en ligne de commande fonctionne cependant.
@@ -40,4 +43,15 @@ De meme pour le fichier log:
 
 mkdir log
 
+------------PROJECTIONS------------------------
+
+Pour utiliser l'outil de visualisation Projections, rajouter $(OPTS) dans le Makefile dans la commande du Main
+
+On lance Projections avec la commande :
+
+./../projections/bin/projections
+
+Ensuite aller chercher le Main.sts dans le dossier MakeDistrib/log
+
+Puis ouvrir les options avec Tools
 

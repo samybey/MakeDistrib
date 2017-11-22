@@ -1,5 +1,5 @@
 CHARMDIR =  ../charm
-OPTS = -display
+OPTS = -tracemode projections
 CHARMC = $(CHARMDIR)/bin/charmc
 CHARMDEBUG =
 
@@ -7,7 +7,7 @@ default: all
 all: Main
 
 Main : Main.o Node.o
-	$(CHARMC) -tracemode projections -language charm++ -o Main build/Main.o build/Node.o
+	$(CHARMC) -language charm++ -o Main build/Main.o build/Node.o
 
 Main.o : src/Main/Main.C src/Main/Main.h Main.decl.h Main.def.h Node.decl.h
 	$(CHARMC) -o build/Main.o src/Main/Main.C
