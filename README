@@ -6,6 +6,25 @@ GCC 4.9.0 et +
 Charm++:
 CharmC v6 et +
 
+
+-----------DEPLOIEMENT-----------------------------
+Apres l'allocation de noeuds dans Grid'5000, le script deploiement.sh deploie tout l'environnement nécessaire.
+
+
+
+
+------------LANCEMENT DE L APPLICATION--------------
+Apres le deploiement terminé, l'application a été build.
+
+Pour executer un Makefile, par exemple le makefile des nombres premier, il faut éxecuter cette ligne de code, avec X coeurs:
+
+./charmrun +pX ++remote-shell oarsh ./Main test/premier/Makefile +isomalloc_sync
+
+Pour avoir les logs nécessaire à l'outil projections, il faut ajouter ++traceroot log, soit :
+
+./charmrun +pX ++remote-shell oarsh ./Main test/premier/Makefile +isomalloc_sync ++traceroot log
+
+
 -------------SCRIPTS--------------------------------
 
 deploiement.sh : 
