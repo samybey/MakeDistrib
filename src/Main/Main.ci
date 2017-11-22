@@ -1,12 +1,15 @@
  mainmodule Main {
  
- class StringNode;
+	class StringNode;
 
-  extern module Node;
+	extern module Node;
 
-  mainchare Main {
-    entry Main(CkArgMsg* msg);
-    entry void done();
-  };
+	mainchare Main {
+
+		entry Main(CkArgMsg* msg);
+		
+		entry void done();
+  	
+  	};
 
 };
