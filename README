@@ -2,10 +2,10 @@ VERSION DU COMPILATEUR :
 
 GCC 4.9.0 et supérieurs
 
-COMPILATION :
+SCRIPTS:
 
-Lancer 'make' dans le répetoire principal, l'exécutable sera créé dans le dossier 'test' qui contient un projet simple "hello world".
+Déployer les outils nécessaires à l'exécution des tests : deploiement.sh
+Lancer deploiement.sh une fois situé dans une des machines allouée par grid5000
+quand le dossier a été cloné à partir de git.
 
-EXECUTION DU TEST:
-
-aller dans le répertoire 'test' et executer la commande './Main Makefile' puis executer './hello'.
+Tester la solution: temps.sh
