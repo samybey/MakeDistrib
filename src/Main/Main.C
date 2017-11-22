@@ -58,7 +58,7 @@ vector<StringNode> firstPass(char* inputFile) {
 		//La regex ci dessous match 3 groupes : la cible, les dependences, et la commande
 		//(cette dernière est très certainement incomplete, il manque surement des caractères à prendre en compte)
 		regex reg(
-				"(?:([\\w\\-]+(?:.[\\w\\-]+)?)(?:[ \\t])*:(?:[ \\t])*(?:(?:\\t| )([\\w. \\t\\-]+))?\\n\\t([\\w. \\-_\\|<>';*/`=\\[\\]]+)(?:\\n|$)+)",
+				"(?:([\\w\\-]+(?:.[\\w\\-]+)?)(?:[ \\t])*:(?:[ \\t])*(?:(?:\\t| )([\\w. \\t\\-]+))?\\n(?:\\t)+([#\\w. \\-\\|<>';*/`=\\[\\]]+)(?:\\n|$)+)",
 				regex_constants::ECMAScript);
 		while (regex_search(makefile, match, reg)) {
 			i = 0;

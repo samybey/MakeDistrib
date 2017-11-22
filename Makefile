@@ -27,3 +27,4 @@ clean:
 	rm -f build/Main.decl.h build/Main.def.h build/Main.o
 	rm -f build/Node.decl.h build/Node.def.h build/Node.o
 	rm -f Main charmrun
+	rm -f log/*
