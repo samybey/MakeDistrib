@@ -8,7 +8,12 @@
 #5                   245.15
 #7                   214.78
 
+<<<<<<< HEAD
 cd test/makefiles/premier
+=======
+
+cd test/premier
+>>>>>>> 4e3ac4a1191c5b0f4e625051a2821482246114cf
 #Format pour n avoir que le temps real
 TIMEFORMAT=%R
 #SUPPRESSION DES FICHIERS TEMPORAIRES
@@ -19,7 +24,7 @@ rm list*
 #essai sans boucle, simplement pour huit processeurs
 touch time8.txt
 echo -n "8  " > time8.txt
-(time ./../../../charmrun +p8 ++remote-shell oarsh ./../../../Main Makefile +isomalloc_sync) 2>> time.txt
+(time ./../../charmrun +p8 ++remote-shell oarsh ./../../Main Makefile +isomalloc_sync) 2>> time.txt
 rm time8.txt
 rm list*
 
@@ -31,7 +36,7 @@ do
     touch time$i.txt
     touch temp
     echo -n "$i   " > time$i.txt
-    (time ./../../../charmrun +p$i ++remote-shell oarsh ./../../../Main Makefile +isomalloc_sync) 2>> temp
+    (time ./../../charmrun +p$i ++remote-shell oarsh ./../../Main Makefile +isomalloc_sync) 2>> temp
     tail -n 1 temp >> time$i.txt
     cat time$i.txt >> time.txt
     rm temp
