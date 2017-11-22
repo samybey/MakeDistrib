@@ -35,7 +35,8 @@ void Node::exec(CProxy_Node pereProxy) {
 }
 
 void Node::execCommand() {
-	system(m_command.c_str());
+  CkPrintf((m_command+"\n").c_str());
+  system(m_command.c_str());
 	if (m_first) {
 		CkExit();
 	} else {
