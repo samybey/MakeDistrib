@@ -73,3 +73,14 @@ On lance Projections avec la commande :
 Ensuite aller chercher le Main.sts dans le dossier MakeDistrib/log
 
 Puis ouvrir les options avec Tool
+
+
+------------TRACER LES RESULTATS--------------
+Il faut, au préalable avoir rempli le fichier timetest.txt avec les résultats obtenus par nombre de coeurs de cette maniere :
+#nombre de coeurs      serie1 (temps sec)	  serie2
+5	   	       245.23 	     		  211.11
+8		       298.32			  178.21
+
+Pour tracer les resultats de performances, il faut executer le script plot.sh, avec :
+
+sh plot.sh
