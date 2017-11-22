@@ -1,7 +1,5 @@
 #!/bin/bash
 
-oarsub -I -l nodes=10,walltime=0:30
-
 mkdir build
 cd ..
 git clone http://charm.cs.illinois.edu/gerrit/charm.git
