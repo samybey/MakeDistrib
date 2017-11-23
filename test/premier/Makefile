@@ -37,7 +37,7 @@ list17.txt:
 	./premier `echo 16*200000000/20 |bc` `echo 17*200000000/20-1 |bc` > list17.txt
 list18.txt: 
 	./premier `echo 17*200000000/20 |bc` `echo 18*200000000/20-1 |bc` > list18.txt
-list19.txt: 
+list19.txt:
 	./premier `echo 18*200000000/20 |bc` `echo 19*200000000/20-1 |bc` > list19.txt
 list20.txt: 
 	./premier `echo 19*200000000/20 |bc` `echo 20*200000000/20-1 |bc` > list20.txt

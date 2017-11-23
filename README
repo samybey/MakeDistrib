@@ -6,33 +6,28 @@ GCC 4.9.0 et +
 Charm++:
 CharmC v6 et +
 
+La première étape consiste à allouer des noeuds dans un site et à y intaller notre dossier MakeDistribue rendu sur teide
 
 -----------DEPLOIEMENT-----------------------------
-Apres l'allocation de noeuds dans Grid'5000, le script deploiement.sh deploie tout l'environnement nécessaire.
-
-
-
+Apres l'allocation de noeuds dans Grid'5000, il faut se rendre dans le dossier MakeDisribue.
+Le script deploiement.sh deploie tout l'environnement nécessaire.
+Il prend un peu de temps.
+Ensuite le script nodelist.sh permet de mettre à jour le fichier ~/.nodelist avec les nodes résevés par l'utilisateur. 
 
 ------------LANCEMENT DE L APPLICATION--------------
-Apres le deploiement terminé, l'application a été build.
+Apres le deploiement terminé, l'application a été build. 
 
 Pour executer un Makefile, par exemple le makefile des nombres premier, il faut éxecuter cette ligne de code, avec X coeurs:
 
-./charmrun +pX ++remote-shell oarsh ./Main test/premier/Makefile +isomalloc_sync
+cd test/premier
+./../../charmrun +pX ++remote-shell oarsh ./../../Main Makefile +isomalloc_sync
 
 Pour avoir les logs nécessaire à l'outil projections, il faut ajouter ++traceroot log, soit :
 
-./charmrun +pX ++remote-shell oarsh ./Main test/premier/Makefile +isomalloc_sync ++traceroot log
+./../../charmrun +pX ++remote-shell oarsh ./../../Main Makefile +isomalloc_sync ++traceroot log
 
 
--------------SCRIPTS--------------------------------
-
-deploiement.sh : 
-Déployer l'environnement sur la plateforme grid5000, une fois les noeuds alloués, quand les sources du projets ont été cloné à partir de git.
-
-nodelist.sh
-Permet de mettre à jour le fichier ~/.nodelist avec les nodes actuellement reservés par l'utilisateur.
-
+-------------AUTRES SCRIPTS--------------------------------
 premier.sh
 Automatise l'execution du makefile des nombres premiers de 5 a 25 coeurs. Les temps de sortie sont disponibles dans les logs.
 
