@@ -17,6 +17,10 @@ Ensuite le script nodelist.sh permet de mettre à jour le fichier ~/.nodelist av
 ------------LANCEMENT DE L APPLICATION--------------
 Apres le deploiement terminé, l'application a été build. 
 
+Le test le plus rapide est le test premier:
+
+sh premier.sh
+
 Pour executer un Makefile, par exemple le makefile des nombres premier, il faut éxecuter cette ligne de code, avec X coeurs:
 
 cd test/premier
