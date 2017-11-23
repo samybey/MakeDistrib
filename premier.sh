@@ -1,5 +1,5 @@
 #!/bin/bash
-
+make
 cd test/premier
 for i in `seq 5 3 25`;
 do
